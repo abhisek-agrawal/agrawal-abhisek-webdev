@@ -1,7 +1,11 @@
-input.form-control {
-    margin-bottom: 5px;
+.top-margin{
+    margin-top: 20px;
 }
 
-body {
-    padding-top: 36px;
+.navbar-fixed.bottom > nav{
+    bottom: 0;
+}
+
+.btn-large{
+    width: 100%;
 }
