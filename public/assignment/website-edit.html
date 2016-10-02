@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Let browser know website is optimized for mobile -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <!-- Import Google Icon Font -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Import materialize.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+    <div class="navbar-fixed">
+        <nav class="blue">
+            <div class="nav-wrapper container">
+                <div class="row">
+                    <div class="col m4 hide-on-small-only">
+                        <a href="website-list.html" class="left text-big">&lt;</a>
+                        <a href="#!" class="left text-big left-margin-10">Websites</a>
+                        <ul id="nav-mobile" class="right">
+                            <li><a href="website-new.html" class="remove-padding"><i class="large material-icons">library_add</i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m8">
+                        <a href="website-list.html" class="left left-margin-10 hide-on-med-and-up text-big">&lt;</a>
+                        <a href="#!" class="left left-margin-15 text-big remove-margin-on-med">Edit Website</a>
+                        <ul id="nav-mobile" class="right">
+                            <li><a onclick="Materialize.toast('Website saved!', 4000)"><i class="large material-icons">done</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container top-margin">
+        <div class="row">
+            <div class="col m4 hide-on-small-only">
+                <div class="row">
+                    <div class="col s12">
+                        <a href="page-list.html" class="left">Address Book App</a>
+                        <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a href="page-list.html" class="left">Blogger</a>
+                        <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a href="page-list.html" class="left">Blogging App</a>
+                        <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a href="page-list.html" class="left">Script Testing App</a>
+                        <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
+                    </div>
+                </div>
+            </div>
+            <form class="col s12 m8">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Name" id="name" type="text" class="validate" value="Blogger">
+                        <label for="name">Website Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea placeholder="Description" id="description" class="materialize-textarea">Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra Labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google at a subdomain of blogspot.com. ... A user can have up to 100 blogs per account.</textarea>
+                        <label for="description">Website Description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a onclick="Materialize.toast('Website deleted!', 4000)" href="website-list.html" class="red waves-effect waves-light btn-large">Delete</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="navbar-fixed bottom">
+        <nav>
+            <div class="nav-wrapper blue">
+                <ul id="nav-mobile" class="right">
+                    <li><a href="profile.html"><i class="large material-icons">perm_identity</i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+</body>
+</html>

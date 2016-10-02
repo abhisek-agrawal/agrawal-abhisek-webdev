@@ -16,9 +16,10 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper blue">
-                <a href="#!" class="brand-logo left">Profile</a>
+                <a href="widget-list.html" class="brand-logo left left-margin-10">&lt;</a>
+                <a href="#!" class="brand-logo left left-margin-40">Edit Widget</a>
                 <ul id="nav-mobile" class="right">
-                    <li><a onclick="Materialize.toast('Profile saved!', 4000)"><i class="large material-icons">done</i></a></li>
+                    <li><a onclick="Materialize.toast('Widget saved!', 4000)" href="widget-list.html"><i class="large material-icons">done</i></a></li>
                 </ul>
             </div>
         </nav>
@@ -29,40 +30,45 @@
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Username" id="username" type="text" class="validate">
-                        <label for="username">Username</label>
+                        <input id="name" type="text" class="validate">
+                        <label for="name">Name</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="alice@wonderland.com" id="email" type="email" class="validate">
-                        <label for="email">Email</label>
+                        <input id="text" type="text" class="validate">
+                        <label for="text">Text</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Alice" id="first-name" type="text" class="validate">
-                        <label for="first-name">First Name</label>
+                        <input id="url" type="text" class="validate" value="https://i.kinja-img.com/gawker-media/image/upload/s--htT-LSdT--/c_scale,fl_progressive,q_80,w_800/e2izpupwuoxbikmc8gsk.jpg">
+                        <label for="url">URL</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Wonderland" id="last-name" type="text" class="validate">
-                        <label for="last-name">Last Name</label>
+                        <input id="width" type="text" class="validate" value="100%">
+                        <label for="width">Width</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload file">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a onclick="Materialize.toast('Widget deleted!', 4000)" href="widget-list.html" class="red waves-effect waves-light btn-large">Delete</a>
                     </div>
                 </div>
             </form>
-        </div>
-
-        <div class="row">
-            <div class="col s12">
-                <a href="website-list.html" class="blue waves-effect waves-light btn-large">Websites</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <a href="login.html" class="red waves-effect waves-light btn-large">Logout</a>
-            </div>
         </div>
     </div>
 
