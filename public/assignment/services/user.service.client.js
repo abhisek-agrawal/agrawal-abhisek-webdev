@@ -10,6 +10,7 @@
             {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
             {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
         ];
+        
         var api = {
             "createUser"            : "createUser",
             "findUserById"          : "findUserById",
@@ -20,11 +21,54 @@
         };
         return api;
 
-        function createUser(user) {}
-        function findUserById(id) {}
-        function findUserByUsername(username) {}
-        function findUserByCredentials(username, password) {}
-        function updateUser(userId, user) {}
-        function deleteUser(userId) {}
+        ////////////////////////////////////////////////////////////
+
+        function createUser(user) {
+            users.push(user);
+        }
+
+        function findUserById(id) {
+            for (var user in users) {
+                if (users[user]._id === id) {
+                    return users[user];
+                }
+            }
+            return null;
+        }
+
+        function findUserByUsername(username) {
+            for (var user in users) {
+                if (users[user].username === username) {
+                    return users[user];
+                }
+            }
+            return null;
+        }
+
+        function findUserByCredentials(username, password) {
+            for (var user in users) {
+                if (users[user].username === username && users[user].password === password) {
+                    return users[user];
+                }
+            }
+            return null;
+        }
+
+        function updateUser(userId, user) {
+            for (var u in users) {
+                if (users[u]._id === userId) {
+                    users.splice(u, 1, user);
+                }
+            }
+        }
+
+        function deleteUser(userId) {
+            for (var user in users) {
+                if (users[user]._id === userId) {
+                    users.splice(user, 1);
+                }
+            }
+        }
+
     }
 })();
