@@ -14,11 +14,11 @@
         ];
 
         var api = {
-            "createWebsite"         : "createWebsite",
-            "findWebsitesByUser"    : "findWebsitesByUser",
-            "findWebsiteById"       : "findWebsiteById",
-            "updateWebsite"         : "updateWebsite",
-            "deleteWebsite"         : "deleteWebsite"
+            "createWebsite"         : createWebsite,
+            "findWebsitesByUser"    : findWebsitesByUser,
+            "findWebsiteById"       : findWebsiteById,
+            "updateWebsite"         : updateWebsite,
+            "deleteWebsite"         : deleteWebsite
         };
         return api;
 

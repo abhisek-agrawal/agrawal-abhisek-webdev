@@ -1,38 +1,20 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper blue">
-            <a href="profile.html" class="brand-logo left left-margin-10">&lt;</a>
+            <a href="#/user/{{model.userId}}" class="brand-logo left left-margin-10">&lt;</a>
             <a href="#!" class="brand-logo left left-margin-40">Websites</a>
             <ul id="nav-mobile" class="right">
-                <li><a href="website-new.html"><i class="large material-icons">library_add</i></a></li>
+                <li><a href="#/user/{{model.userId}}/website/new"><i class="large material-icons">library_add</i></a></li>
             </ul>
         </div>
     </nav>
 </div>
 
 <div class="container top-margin">
-    <div class="row">
+    <div class="row" ng-repeat="website in model.websites">
         <div class="col s12">
-            <a href="page-list.html" class="left">Address Book App</a>
-            <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <a href="page-list.html" class="left">Blogger</a>
-            <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <a href="page-list.html" class="left">Blogging App</a>
-            <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <a href="page-list.html" class="left">Script Testing App</a>
-            <a href="website-edit.html" class="right"><i class="tiny material-icons">settings</i></a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}/page" class="left">{{website.name}}</a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="right"><i class="tiny material-icons">settings</i></a>
         </div>
     </div>
 </div>
@@ -41,7 +23,7 @@
     <nav>
         <div class="nav-wrapper blue">
             <ul id="nav-mobile" class="right">
-                <li><a href="profile.html"><i class="large material-icons">perm_identity</i></a></li>
+                <li><a href="#/user/{{model.userId}}"><i class="large material-icons">perm_identity</i></a></li>
             </ul>
         </div>
     </nav>

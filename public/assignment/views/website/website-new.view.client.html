@@ -52,13 +52,13 @@
         <form class="col s12 m8">
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Name" id="name" type="text" class="validate">
+                    <input ng-model="model.website.name" placeholder="Name" id="name" type="text" class="validate">
                     <label for="name">Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea placeholder="Description" id="description" class="materialize-textarea"></textarea>
+                    <textarea ng-model="model.website.description" placeholder="Description" id="description" class="materialize-textarea"></textarea>
                     <label for="description">Description</label>
                 </div>
             </div>

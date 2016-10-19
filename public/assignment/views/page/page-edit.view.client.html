@@ -58,14 +58,14 @@
         <form class="col s12 m8">
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Name" id="name" type="text" class="validate" value="Blog Post">
-                    <label for="name">Name</label>
+                    <input ng-model="model.page.name" placeholder="Name" id="name" type="text" class="validate" value="Blog Post">
+                    <label class="active" for="name">Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Title" id="title" type="text" class="validate">
-                    <label for="title">Title</label>
+                    <input ng-model="model.page.description" placeholder="Title" id="title" type="text" class="validate">
+                    <label class="active" for="title">Title</label>
                 </div>
             </div>
             <div class="row">
