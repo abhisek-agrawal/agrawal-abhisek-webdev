@@ -1,8 +1,8 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper blue">
-            <a href="widget-list.html" class="brand-logo left left-margin-10">&lt;</a>
-            <a href="#!" class="brand-logo left left-margin-40">Choose Widget</a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="brand-logo left left-margin-10">&lt;</a>
+            <a class="brand-logo left left-margin-40">Choose Widget</a>
         </div>
     </nav>
 </div>
@@ -10,52 +10,52 @@
 <div class="container top-margin">
     <div class="row">
         <div class="col s12">
-            <a href="widget-heading.html">Header</a>
+            <a ng-click="model.createWidget('HEADER')">Header</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="#!">Label</a>
+            <a>Label</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="#!">HTML</a>
+            <a>HTML</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="#!">Text Input</a>
+            <a>Text Input</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="#!">Link</a>
+            <a>Link</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="#!">Button</a>
+            <a>Button</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="widget-image.html">Image</a>
+            <a ng-click="model.createWidget('IMAGE')">Image</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="widget-youtube.html">YouTube</a>
+            <a ng-click="model.createWidget('YOUTUBE')">YouTube</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="#!">Data Table</a>
+            <a>Data Table</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="#!">Repeater</a>
+            <a>Repeater</a>
         </div>
     </div>
 </div>
@@ -64,7 +64,7 @@
     <nav>
         <div class="nav-wrapper blue">
             <ul id="nav-mobile" class="right">
-                <li><a href="profile.html"><i class="large material-icons">perm_identity</i></a></li>
+                <li><a href="#/user/{{model.userId}}"><i class="large material-icons">perm_identity</i></a></li>
             </ul>
         </div>
     </nav>

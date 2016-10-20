@@ -48,7 +48,7 @@
         function updatePage(pageId, page) {
             for (var p in pages) {
                 if (pages[p]._id === pageId) {
-                    pages.splice(p, 1, page);
+                    $.extend(true, pages[p], page);
                 }
             }
         }

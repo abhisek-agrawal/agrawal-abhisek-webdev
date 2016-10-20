@@ -1,9 +1,9 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper blue">
-            <a href="#!" class="brand-logo left">Profile</a>
+            <a class="brand-logo left">Profile</a>
             <ul id="nav-mobile" class="right">
-                <li><a onclick="Materialize.toast('Profile saved!', 4000)"><i class="large material-icons">done</i></a></li>
+                <li><a ng-click="model.updateProfile(model.user)"><i class="large material-icons">done</i></a></li>
             </ul>
         </div>
     </nav>
@@ -41,12 +41,12 @@
 
     <div class="row">
         <div class="col s12">
-            <a href="website-list.html" class="blue waves-effect waves-light btn-large">Websites</a>
+            <a href="#/user/{{model.userId}}/website" class="blue waves-effect waves-light btn-large">Websites</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a href="login.html" class="red waves-effect waves-light btn-large">Logout</a>
+            <a href="#/" class="red waves-effect waves-light btn-large">Logout</a>
         </div>
     </div>
 </div>
@@ -55,7 +55,7 @@
     <nav>
         <div class="nav-wrapper blue">
             <ul id="nav-mobile" class="right">
-                <li><a href="profile.html"><i class="large material-icons">perm_identity</i></a></li>
+                <li><a><i class="large material-icons">perm_identity</i></a></li>
             </ul>
         </div>
     </nav>

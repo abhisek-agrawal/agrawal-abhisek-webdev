@@ -57,7 +57,7 @@
         function updateUser(userId, user) {
             for (var u in users) {
                 if (users[u]._id === userId) {
-                    users.splice(u, 1, user);
+                    $.extend(true, users[u], user);
                 }
             }
         }

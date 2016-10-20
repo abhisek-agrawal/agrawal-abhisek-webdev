@@ -32,7 +32,7 @@
             })
             .when("/user/:uid/website/new", {
                 templateUrl: "views/website/website-new.view.client.html",
-                controller: "NeWebsiteController",
+                controller: "NewWebsiteController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid", {
@@ -62,7 +62,7 @@
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
                 templateUrl: "views/widget/widget-choose.view.client.html",
-                controller: "NeWidgetController",
+                controller: "NewWidgetController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {

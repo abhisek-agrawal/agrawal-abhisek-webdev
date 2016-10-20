@@ -2,7 +2,7 @@
     <nav>
         <div class="nav-wrapper blue">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="brand-logo left left-margin-10">&lt;</a>
-            <a href="#!" class="brand-logo left left-margin-40">Widgets</a>
+            <a class="brand-logo left left-margin-40">Widgets</a>
             <ul id="nav-mobile" class="right">
                 <li><a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"><i class="large material-icons">playlist_add</i></a></li>
             </ul>
@@ -32,8 +32,8 @@
             </div>
         </div>
         <div class="edit-and-order-icons">
-            <a href="widget-heading.html"><i class="tiny material-icons">settings</i></a>
-            <a href="#!"><i class="tiny material-icons">reorder</i></a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}"><i class="tiny material-icons">settings</i></a>
+            <a><i class="tiny material-icons">reorder</i></a>
         </div>
     </div>
 </div>
@@ -41,8 +41,8 @@
 <div class="navbar-fixed bottom">
     <nav>
         <div class="nav-wrapper blue">
-            <a href="#!" class="brand-logo left"><i class="large material-icons">play_arrow</i></a>
-            <a href="#!" class="brand-logo left left-margin-40"><i class="large material-icons">visibility</i></a>
+            <a class="brand-logo left"><i class="large material-icons">play_arrow</i></a>
+            <a class="brand-logo left left-margin-40"><i class="large material-icons">visibility</i></a>
             <ul id="nav-mobile" class="right">
                 <li><a href="#/user/{{model.userId}}"><i class="large material-icons">perm_identity</i></a></li>
             </ul>

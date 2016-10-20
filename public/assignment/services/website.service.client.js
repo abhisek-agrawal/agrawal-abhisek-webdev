@@ -51,7 +51,7 @@
         function updateWebsite(websiteId, website) {
             for (var w in websites) {
                 if (websites[w]._id === websiteId) {
-                    websites.splice(w, 1, website);
+                    $.extend(true, websites[w], website);
                 }
             }
         }

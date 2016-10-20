@@ -1,10 +1,10 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper blue">
-            <a href="widget-list.html" class="brand-logo left left-margin-10">&lt;</a>
-            <a href="#!" class="brand-logo left left-margin-40">Edit Widget</a>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="brand-logo left left-margin-10">&lt;</a>
+            <a class="brand-logo left left-margin-40">Edit Widget</a>
             <ul id="nav-mobile" class="right">
-                <li><a onclick="Materialize.toast('Widget saved!', 4000)" href="widget-list.html"><i class="large material-icons">done</i></a></li>
+                <li><a ng-click="model.updateWidget(model.widget)"><i class="large material-icons">done</i></a></li>
             </ul>
         </div>
     </nav>
@@ -12,7 +12,24 @@
 
 <div class="container top-margin">
     <div class="row">
-        
+        <div ng-switch="model.widget.widgetType">
+            <div ng-switch-when="HEADER">
+                <ng-include src="'views/widget/widget-heading.view.client.html'">
+            </div>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="'views/widget/widget-image.view.client.html'">
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="'views/widget/widget-youtube.view.client.html'">
+            </div>
+            <form class="col s12">
+                <div class="row">
+                    <div class="col s12">
+                        <a ng-click="model.deleteWidget(model.widget._id)" class="red waves-effect waves-light btn-large">Delete</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -20,7 +37,7 @@
     <nav>
         <div class="nav-wrapper blue">
             <ul id="nav-mobile" class="right">
-                <li><a href="profile.html"><i class="large material-icons">perm_identity</i></a></li>
+                <li><a href="#/user/{{model.userId}}"><i class="large material-icons">perm_identity</i></a></li>
             </ul>
         </div>
     </nav>
