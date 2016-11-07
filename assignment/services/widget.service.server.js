@@ -92,19 +92,16 @@ module.exports = function(app) {
         var userId = req.body.userId;
         var websiteId = req.body.websiteId;
         var pageId = req.body.pageId;
-        var widgetId = req.body.widgetId;
+        var widgetId = req.body._id;
 
         var widget = req.body;
         widget.url = "../uploads/" + req.file.filename;
         delete widget["userId"];
         delete widget["websiteId"];
-        delete widget["pageId"];
 
         for (var w in widgets) {
             if (widgets[w]._id === widgetId) {
-                for (var key in widget) {
-                    if (widget.hasOwnProperty(key)) widgets[w][key] = widget[key];
-                }
+                widgets[w] = widget;
             }
         }
 

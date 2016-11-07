@@ -31,7 +31,6 @@
         }
 
         function checkSafeImageUrl(url) {
-            console.log(url);
             return $sce.trustAsResourceUrl(url);
         }
 
