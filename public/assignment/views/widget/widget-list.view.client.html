@@ -10,7 +10,7 @@
     </nav>
 </div>
 
-<div class="container top-margin">
+<div sortable class="container top-margin">
     <div class="row relative" ng-repeat="widget in model.widgets">
         <div class="col s12" ng-switch="widget.widgetType">
             <div ng-switch-when="HEADER" ng-switch="widget.size">
@@ -22,7 +22,7 @@
                 <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
             <div ng-switch-when="IMAGE">
-                <img class="auto-width materialboxed" ng-src="{{model.checkSafeImageUrl(widget.url)}}" width="{{widget.width}}" alt="automated-car">
+                <img class="auto-width materialboxed" ng-src="{{model.checkSafeImageUrl(widget.url)}}" width="{{widget.width}}" alt="image">
             </div>
             <div ng-switch-when="HTML">
                 <div ng-bind-html="model.safeHtml(widget.text)"></div>

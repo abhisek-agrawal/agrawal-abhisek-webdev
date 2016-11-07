@@ -1,25 +1,49 @@
-<form class="col s12">
+<form class="col s12" action="/api/upload" method="post" enctype="multipart/form-data">
+    <div class="row" style="display: none;">
+        <div class="input-field col s12">
+            <input name="userId" ng-model="model.userId" id="userId" type="text" class="validate">
+            <label class="active" for="userId">UserId</label>
+        </div>
+    </div>
+    <div class="row" style="display: none;">
+        <div class="input-field col s12">
+            <input name="websiteId" ng-model="model.websiteId" id="websiteId" type="text" class="validate">
+            <label class="active" for="websiteId">WebsiteId</label>
+        </div>
+    </div>
+    <div class="row" style="display: none;">
+        <div class="input-field col s12">
+            <input name="pageId" ng-model="model.pageId" id="pageId" type="text" class="validate">
+            <label class="active" for="pageId">PageId</label>
+        </div>
+    </div>
+    <div class="row" style="display: none;">
+        <div class="input-field col s12">
+            <input name="_id" ng-model="model.widget._id" id="id" type="text" class="validate">
+            <label class="active" for="id">Id</label>
+        </div>
+    </div>
     <div class="row">
         <div class="input-field col s12">
-            <input ng-model="model.widget.widgetType" id="name" type="text" class="validate">
+            <input name="widgetType" ng-model="model.widget.widgetType" id="name" type="text" class="validate">
             <label class="active" for="name">Name</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <input ng-model="model.widget.text" id="text" type="text" class="validate">
+            <input name="text" ng-model="model.widget.text" id="text" type="text" class="validate">
             <label class="active" for="text">Text</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <input ng-model="model.widget.url" id="url" type="text" class="validate" value="https://i.kinja-img.com/gawker-media/image/upload/s--htT-LSdT--/c_scale,fl_progressive,q_80,w_800/e2izpupwuoxbikmc8gsk.jpg">
+            <input name="url" ng-model="model.widget.url" id="url" type="text" class="validate" value="https://i.kinja-img.com/gawker-media/image/upload/s--htT-LSdT--/c_scale,fl_progressive,q_80,w_800/e2izpupwuoxbikmc8gsk.jpg">
             <label class="active" for="url">URL</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <input ng-model="model.widget.width" id="width" type="text" class="validate" value="100%">
+            <input name="width" ng-model="model.widget.width" id="width" type="text" class="validate" value="100%">
             <label class="active" for="width">Width</label>
         </div>
     </div>
@@ -27,7 +51,7 @@
         <div class="file-field input-field col s12">
             <div class="btn">
                 <span>File</span>
-                <input type="file">
+                <input name="myFile" type="file">
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload file">
@@ -36,7 +60,7 @@
     </div>
     <div class="row">
         <div class="col s12">
-            <a onclick="Materialize.toast('Image upload not available at the moment!', 4000)" class="blue waves-effect waves-light btn-large">Upload</a>
+            <button type="submit" class="blue waves-effect waves-light btn-large">Upload</button>
         </div>
     </div>
 </form>

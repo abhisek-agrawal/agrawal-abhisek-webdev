@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("WebsiteService", WebsiteService);
 
-    function WebsiteService() {
+    function WebsiteService($http) {
         var websites = [
             { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
             { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
@@ -25,43 +25,28 @@
         ////////////////////////////////////////////////////////////
 
         function createWebsite(userId, website) {
-            website.developerId = userId;
-            websites.push(website);
+            var url = "/api/user/"+ userId +"/website";
+            return $http.post(url, website);
         }
 
         function findWebsitesByUser(userId) {
-            result = [];
-            for (var website in websites) {
-                if (websites[website].developerId === userId) {
-                    result.push(websites[website]);
-                }
-            }
-            return result;
+            var url = "/api/user/"+ userId +"/website";
+            return $http.get(url);
         }
 
         function findWebsiteById(websiteId) {
-            for (var website in websites) {
-                if (websites[website]._id === websiteId) {
-                    return websites[website];
-                }
-            }
-            return null;
+            var url = "/api/website/" + websiteId;
+            return $http.get(url);
         }
 
         function updateWebsite(websiteId, website) {
-            for (var w in websites) {
-                if (websites[w]._id === websiteId) {
-                    $.extend(true, websites[w], website);
-                }
-            }
+            var url = "/api/website/" + websiteId;
+            return $http.put(url, website);
         }
 
         function deleteWebsite(websiteId) {
-            for (var website in websites) {
-                if (websites[website]._id === websiteId) {
-                    websites.splice(website, 1);
-                }
-            }
+            var url = "/api/website/" + websiteId;
+            return $http.delete(url);
         }
         
     }

@@ -1,0 +1,226 @@
+/***********************************************/
+/* Miscellaneous                               */
+/***********************************************/
+
+body{ background-color: #FAF9F9; }
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Syncopate', sans-serif;
+}
+
+p, a, input, span{
+    font-family: 'Abel', sans-serif;
+}
+
+a{
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+a:hover{ 
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+p{
+    font-size: 18px;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+/***********************************************/
+/* Home                                        */
+/***********************************************/
+
+.jumbotron{
+    padding-top: 10px;
+    background-color: #E95C5A;
+}
+
+.jumbotron>.background-image{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 266px;
+    background: url('../images/blood-donation.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    opacity: 0.15;
+}
+
+.jumbotron h2, .jumbotron p{
+    font-family: 'Abel', sans-serif;
+    color: #FAF9F9;
+}
+
+.user-action{
+    background-color: #E9E8E8;
+    padding: 20px;
+    position: absolute;
+    margin-right: 15px;
+    z-index: 1;
+}
+
+.user-action .form-group{ margin-bottom: 0; }
+
+.user-action p{
+    color: #928186;
+    margin-bottom: 2px;
+    font-size: 18px;
+}
+
+.user-action a{
+    font-size: 24px;
+    color: #E95C5A;
+}
+
+.user-action hr{ border-top: 1px solid #928186; }
+
+.user-action .division{
+    position: absolute;
+    top: 10px;
+    left: 45%;
+    padding: 0 15px;
+    background-color: #E9E8E8;
+}
+
+.user-action .center{ margin: 18px 0; }
+
+.user-action .user-icon{
+    background-color: #63CCA0;
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.user-action input{
+    width: 100%;
+    border-radius: 0;
+    background-color: #FAF9F9;
+}
+
+.user-action .disable-padding-right{ padding-right: 0; }
+
+.user-action .disable-padding-left{ padding-left: 0; }
+
+.user-action .enable-top-margin{ margin-top: 15px; }
+
+.user-action .btn{
+    background-color: #63CCA0;
+    border-radius: 0;
+    color: #FAF9F9;
+    font-size: 14px;
+    text-align: left;
+}
+
+img.donor-card{ z-index: -1; }
+
+.footer{
+    background-color: #E95C5A;
+    margin-top: 30px;
+    padding: 20px 0;
+}
+
+.footer img{
+    width: 30px;
+    height: auto;
+}
+
+.footer ul{
+    width: 128px;
+    margin: auto;
+}
+
+.footer p{
+    text-align: center;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 20px;
+    color: #FAF9F9;
+}
+
+.footer span{ font-family: 'Syncopate', sans-serif; }
+
+.footer span.donor-color{ color: #63CCA0; }
+
+.footer span.org-color{ color: #77A4EE; }
+
+@media screen and (min-width: 992px) {
+    .jumbotron h2{ margin-top: 220px; }
+    .jumbotron>.background-image{ height: 495px; }
+    img.donor-card{
+        margin-top: -60px;
+        margin-left: -60px;
+    }
+    p.donor-para{ margin-top: 200px; }
+}
+
+@media screen and (max-width:991px) and (min-width:426px) {
+    .donor-card{ display: none; }
+    p.donor-para{ margin-top: 650px; }
+    @media screen and (min-width:768px) { p.donor-para{ margin-top: 480px; } }
+    @media screen and (max-width:500px) { p.donor-para{ margin-top: 600px; } }
+}
+
+@media screen and (max-width: 425px) {
+    .donor-card{ 
+        margin-top:  480px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Navbar */
+
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:hover {
+    color: #FAF9F9;
+    font-family: 'Syncopate', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.navbar-default .navbar-nav .special-button{ margin: 7px 0; }
+
+.navbar-default .navbar-nav .special-button a,
+.navbar-default .navbar-nav .special-button a:hover{
+    background-color: #63CCA0;
+    padding: 8px 15px;
+    color: #FAF9F9;
+}
+
+.navbar-default{
+    background-color: transparent;
+    border: none;
+}
+
+.navbar-brand{ padding: 5px 15px; }
+
+.navbar-brand img{
+    max-height: 100%;
+    width: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form{
+        border-color: #E9E8E8;
+        background-color: #E9E8E8;
+    }
+
+    .navbar-default .navbar-nav>li>a{ color: #E95C5A; }
+    .navbar-default .navbar-nav .special-button a{ color: #E9E8E8; }
+    .navbar-default .navbar-toggle .icon-bar{ background-color: #E9E8E8; }
+    .navbar-default .navbar-toggle{ border-color: transparent; }
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{ background-color: transparent; }
+}

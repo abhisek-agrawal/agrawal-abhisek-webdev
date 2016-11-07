@@ -10,12 +10,18 @@
         vm.login = login;
 
         function login(user) {
-            user = UserService.findUserByCredentials(user.username, user.password);
-            if(user) {
-                $location.url("/user/" + user._id);
-            } else {
-                Materialize.toast('Unable to login!', 4000);
-            }
+            var promise = UserService.findUserByCredentials(user.username, user.password);
+            promise
+                .success(function(user) {
+                    if(user === "0"){
+                        Materialize.toast('Unable to login!', 4000);
+                    } else {
+                        $location.url("/user/" + user._id);
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
     }
 
@@ -33,8 +39,16 @@
                     lastName: "",
                     email: ""
                 };
-                UserService.createUser(u);
-                $location.url("/user/" + u._id);
+                var promise = UserService.createUser(u);
+                promise
+                    .success(function(status) {
+                        if(status === 200) {
+                            $location.url("/user/" + u._id);
+                        }
+                    })
+                    .error(function(error) {
+
+                    });
             } else {
                 Materialize.toast('Passwords do not match!', 4000);
             }
@@ -47,13 +61,30 @@
         vm.updateProfile = updateProfile;
 
         function init() {
-            vm.user = UserService.findUserById(vm.userId);
+            var promise = UserService.findUserById(vm.userId);
+            promise
+                .success(function(user) {
+                    if(user !== "0") {
+                        vm.user = user;
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
         init();
 
         function updateProfile(user) {
-            UserService.updateUser(vm.userId, user);
-            Materialize.toast('Profile saved!', 4000);
+            var promise = UserService.updateUser(vm.userId, user);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        Materialize.toast('Profile saved!', 4000);
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
     }
 })();

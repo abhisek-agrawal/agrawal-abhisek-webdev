@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("PageService", PageService);
 
-    function PageService() {
+    function PageService($http) {
         var pages = [
             { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
             { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
@@ -22,43 +22,28 @@
         ////////////////////////////////////////////////////////////
 
         function createPage(websiteId, page) {
-            page.websiteId = websiteId;
-            pages.push(page);
+            var url = "/api/website/"+ websiteId +"/page";
+            return $http.post(url, page);
         }
 
         function findPageByWebsiteId(websiteId) {
-            result = [];
-            for (var page in pages) {
-                if (pages[page].websiteId === websiteId) {
-                    result.push(pages[page]);
-                }
-            }
-            return result;
+            var url = "/api/website/"+ websiteId +"/page";
+            return $http.get(url);
         }
 
         function findPageById(pageId) {
-            for (var page in pages) {
-                if (pages[page]._id === pageId) {
-                    return pages[page];
-                }
-            }
-            return null;
+            var url = "/api/page/" + pageId;
+            return $http.get(url);
         }
 
         function updatePage(pageId, page) {
-            for (var p in pages) {
-                if (pages[p]._id === pageId) {
-                    $.extend(true, pages[p], page);
-                }
-            }
+            var url = "/api/page/" + pageId;
+            return $http.put(url, page);
         }
 
         function deletePage(pageId) {
-            for (var page in pages) {
-                if (pages[page]._id === pageId) {
-                    pages.splice(page, 1);
-                }
-            }
+            var url = "/api/page/" + pageId;
+            return $http.delete(url);
         }
         
     }

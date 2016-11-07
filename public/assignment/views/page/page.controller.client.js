@@ -10,7 +10,14 @@
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise
+                .success(function(pages) {
+                    vm.pages = pages;
+                })
+                .error(function(error) {
+
+                });
         }
         init();
     }
@@ -22,8 +29,14 @@
         vm.createPage = createPage;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-            console.log(vm.pages);
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise
+                .success(function(pages) {
+                    vm.pages = pages;
+                })
+                .error(function(error) {
+
+                });
         }
         init();
 
@@ -33,10 +46,27 @@
                 name: page.name,
                 description: page.description
             };
-            PageService.createPage(vm.websiteId, p);
-            vm.pages.push(PageService.findPageById(p._id));
-            Materialize.toast('New page created!', 4000);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            var promise = PageService.createPage(vm.websiteId, p);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        var promise2 = PageService.findPageById(p._id);
+                        promise2
+                            .success(function(page) {
+                                if(page !== "0") {
+                                    vm.pages.push(page);
+                                }
+                            })
+                            .error(function(error) {
+
+                            });
+                        Materialize.toast('New page created!', 4000);
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
     }
 
@@ -49,23 +79,70 @@
         vm.updatePage = updatePage;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-            vm.page = PageService.findPageById(vm.pageId);
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise
+                .success(function(pages) {
+                    vm.pages = pages;
+                })
+                .error(function(error) {
+
+                });
+
+            var promise = PageService.findPageById(vm.pageId);
+            promise
+                .success(function(page) {
+                    if(page !== "0") {
+                        vm.page = page;
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
         init();
 
         function pageDelete(pageId) {
-            PageService.deletePage(pageId);
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-            Materialize.toast('Page deleted!', 4000);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            var promise = PageService.deletePage(pageId);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        var promise2 = PageService.findPageByWebsiteId(vm.websiteId);
+                        promise2
+                            .success(function(pages) {
+                                vm.pages = pages;
+                            })
+                            .error(function(error) {
+
+                            })
+                        Materialize.toast('Page deleted!', 4000);
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    }
+                })
+                .error(function(error) {
+
+                })
         }
 
         function updatePage(page) {
-            PageService.updatePage(vm.pageId, page);
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-            Materialize.toast('Page saved!', 4000);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            var promise = PageService.updatePage(vm.pageId, page);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        var promise2 = PageService.findPageByWebsiteId(vm.websiteId);
+                        promise2
+                            .success(function(pages) {
+                                vm.pages = pages;
+                            })
+                            .error(function(error) {
+
+                            })
+                        Materialize.toast('Page saved!', 4000);
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    }
+                })
+                .error(function(error) {
+
+                })
         }
     }
 })();

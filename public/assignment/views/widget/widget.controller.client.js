@@ -15,7 +15,14 @@
         vm.checkSafeYoutubeUrl = checkSafeYoutubeUrl;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            var promise = WidgetService.findWidgetsByPageId(vm.pageId);
+            promise
+                .success(function(widgets) {
+                    vm.widgets = widgets;
+                })
+                .error(function(error) {
+
+                })
         }
         init();
 
@@ -24,6 +31,7 @@
         }
 
         function checkSafeImageUrl(url) {
+            console.log(url);
             return $sce.trustAsResourceUrl(url);
         }
 
@@ -47,8 +55,16 @@
                 _id: (new Date()).getTime().toString(),
                 widgetType: widgetType
             };
-            WidgetService.createWidget(vm.pageId, widget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id);
+            var promise = WidgetService.createWidget(vm.pageId, widget);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id);
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
     }
     
@@ -60,22 +76,63 @@
         vm.widgetId = $routeParams["wgid"];
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
+        vm.uploadImage = uploadImage;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            var promise = WidgetService.findWidgetById(vm.widgetId);
+            promise
+                .success(function(widget) {
+                    if(widget !== "0") {
+                        vm.widget = widget;
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
         init();
 
         function updateWidget(widget) {
-            WidgetService.updateWidget(vm.widgetId, widget);
-            Materialize.toast('Widget saved!', 4000);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            var promise = WidgetService.updateWidget(vm.widgetId, widget);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        Materialize.toast('Widget saved!', 4000);
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
 
         function deleteWidget(widgetId) {
-            WidgetService.deleteWidget(widgetId);
-            Materialize.toast('Widget deleted!', 4000);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            var promise = WidgetService.deleteWidget(widgetId);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        Materialize.toast('Widget deleted!', 4000);
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    }
+                })
+                .error(function(error) {
+
+                });
+        }
+
+        function uploadImage(widget) {
+            if(widget.imageFile) {
+                var promise = WidgetService.uploadImage(widget);
+                promise
+                    .success(function(myFile) {
+                        console.log(myFile);
+                    })
+                    .error(function(error) {
+
+                    });
+            } else {
+                Materialize.toast('No file selected!', 4000);
+            }
         }
     }
 })();

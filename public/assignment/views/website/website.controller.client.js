@@ -9,7 +9,14 @@
         var vm = this;
         vm.userId = $routeParams["uid"];
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            var promise = WebsiteService.findWebsitesByUser(vm.userId);
+            promise
+                .success(function(websites) {
+                    vm.websites = websites;
+                })
+                .error(function(error) {
+
+                });
         }
         init();
     }
@@ -20,7 +27,14 @@
         vm.createWebsite = createWebsite;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            var promise = WebsiteService.findWebsitesByUser(vm.userId);
+            promise
+                .success(function(websites) {
+                    vm.websites = websites;
+                })
+                .error(function(error) {
+
+                });
         }
         init();
 
@@ -30,10 +44,27 @@
                 name: website.name,
                 description: website.description
             };
-            WebsiteService.createWebsite(vm.userId, w);
-            vm.websites.push(WebsiteService.findWebsiteById(w._id));
-            Materialize.toast('New website created!', 4000);
-            $location.url("/user/" + vm.userId + "/website");
+            var promise = WebsiteService.createWebsite(vm.userId, w);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        var promise2 = WebsiteService.findWebsiteById(w._id);
+                        promise2
+                            .success(function(website) {
+                                if(website !== "0") {
+                                    vm.websites.push(website);
+                                }
+                            })
+                            .error(function(error) {
+
+                            });
+                        Materialize.toast('New website created!', 4000);
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
     }
 
@@ -45,23 +76,70 @@
         vm.updateWebsite = updateWebsite;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            var promise = WebsiteService.findWebsitesByUser(vm.userId);
+            promise
+                .success(function(websites) {
+                    vm.websites = websites;
+                })
+                .error(function(error) {
+
+                });
+
+            var promise = WebsiteService.findWebsiteById(vm.websiteId);
+            promise
+                .success(function(website) {
+                    if(website !== "0") {
+                        vm.website = website;
+                    }
+                })
+                .error(function(error) {
+
+                });
         }
         init();
 
         function websiteDelete(websiteId) {
-            WebsiteService.deleteWebsite(websiteId);
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
-            Materialize.toast('Website deleted!', 4000);
-            $location.url("/user/" + vm.userId + "/website");
+            var promise = WebsiteService.deleteWebsite(websiteId);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        var promise2 = WebsiteService.findWebsitesByUser(vm.userId);
+                        promise2
+                            .success(function(websites) {
+                                vm.websites = websites;
+                            })
+                            .error(function(error) {
+
+                            })
+                        Materialize.toast('Website deleted!', 4000);
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
+                })
+                .error(function(error) {
+
+                })
         }
 
         function updateWebsite(website) {
-            WebsiteService.updateWebsite(vm.websiteId, website);
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
-            Materialize.toast('Website saved!', 4000);
-            $location.url("/user/" + vm.userId + "/website");
+            var promise = WebsiteService.updateWebsite(vm.websiteId, website);
+            promise
+                .success(function(status) {
+                    if(status === "200") {
+                        var promise2 = WebsiteService.findWebsitesByUser(vm.userId);
+                        promise2
+                            .success(function(websites) {
+                                vm.websites = websites;
+                            })
+                            .error(function(error) {
+
+                            })
+                        Materialize.toast('Website saved!', 4000);
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
+                })
+                .error(function(error) {
+
+                })
         }
     }
 })();
