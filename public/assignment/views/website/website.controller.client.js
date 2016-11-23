@@ -11,8 +11,8 @@
         function init() {
             var promise = WebsiteService.findWebsitesByUser(vm.userId);
             promise
-                .success(function(websites) {
-                    vm.websites = websites;
+                .success(function(user) {
+                    vm.websites = user.websites;
                 })
                 .error(function(error) {
 
@@ -29,8 +29,8 @@
         function init() {
             var promise = WebsiteService.findWebsitesByUser(vm.userId);
             promise
-                .success(function(websites) {
-                    vm.websites = websites;
+                .success(function(user) {
+                    vm.websites = user.websites;
                 })
                 .error(function(error) {
 
@@ -40,18 +40,17 @@
 
         function createWebsite(website) {
             w = {
-                _id: (new Date()).getTime().toString(),
                 name: website.name,
                 description: website.description
             };
             var promise = WebsiteService.createWebsite(vm.userId, w);
             promise
                 .success(function(status) {
-                    if(status === "200") {
+                    if(status) {
                         var promise2 = WebsiteService.findWebsiteById(w._id);
                         promise2
                             .success(function(website) {
-                                if(website !== "0") {
+                                if(website) {
                                     vm.websites.push(website);
                                 }
                             })
@@ -78,8 +77,8 @@
         function init() {
             var promise = WebsiteService.findWebsitesByUser(vm.userId);
             promise
-                .success(function(websites) {
-                    vm.websites = websites;
+                .success(function(user) {
+                    vm.websites = user.websites;
                 })
                 .error(function(error) {
 
@@ -88,7 +87,7 @@
             var promise = WebsiteService.findWebsiteById(vm.websiteId);
             promise
                 .success(function(website) {
-                    if(website !== "0") {
+                    if(website) {
                         vm.website = website;
                     }
                 })
@@ -102,11 +101,11 @@
             var promise = WebsiteService.deleteWebsite(websiteId);
             promise
                 .success(function(status) {
-                    if(status === "200") {
+                    if(status) {
                         var promise2 = WebsiteService.findWebsitesByUser(vm.userId);
                         promise2
-                            .success(function(websites) {
-                                vm.websites = websites;
+                            .success(function(user) {
+                                vm.websites = user.websites;
                             })
                             .error(function(error) {
 
@@ -124,11 +123,11 @@
             var promise = WebsiteService.updateWebsite(vm.websiteId, website);
             promise
                 .success(function(status) {
-                    if(status === "200") {
+                    if(status) {
                         var promise2 = WebsiteService.findWebsitesByUser(vm.userId);
                         promise2
-                            .success(function(websites) {
-                                vm.websites = websites;
+                            .success(function(user) {
+                                vm.websites = user.websites;
                             })
                             .error(function(error) {
 

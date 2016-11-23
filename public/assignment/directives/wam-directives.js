@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("jgaDirectives", [])
+        .module("wamDirectives", [])
         .directive("sortable", sortable);
 
         function sortable() {
@@ -37,7 +37,7 @@
                 var promise = WidgetService.sortWidget(vm.pageId, start, end);
                 promise
                     .success(function(status) {
-                        if(status === "200") {
+                        if(status) {
                             console.log("Widget sorted!");
                         }
                     })

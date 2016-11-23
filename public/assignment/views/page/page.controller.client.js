@@ -12,8 +12,8 @@
         function init() {
             var promise = PageService.findPageByWebsiteId(vm.websiteId);
             promise
-                .success(function(pages) {
-                    vm.pages = pages;
+                .success(function(website) {
+                    vm.pages = website.pages;
                 })
                 .error(function(error) {
 
@@ -31,8 +31,8 @@
         function init() {
             var promise = PageService.findPageByWebsiteId(vm.websiteId);
             promise
-                .success(function(pages) {
-                    vm.pages = pages;
+                .success(function(website) {
+                    vm.pages = website.pages;
                 })
                 .error(function(error) {
 
@@ -42,18 +42,17 @@
 
         function createPage(page) {
             p = {
-                _id: (new Date()).getTime().toString(),
                 name: page.name,
                 description: page.description
             };
             var promise = PageService.createPage(vm.websiteId, p);
             promise
                 .success(function(status) {
-                    if(status === "200") {
+                    if(status) {
                         var promise2 = PageService.findPageById(p._id);
                         promise2
                             .success(function(page) {
-                                if(page !== "0") {
+                                if(page) {
                                     vm.pages.push(page);
                                 }
                             })
@@ -81,8 +80,8 @@
         function init() {
             var promise = PageService.findPageByWebsiteId(vm.websiteId);
             promise
-                .success(function(pages) {
-                    vm.pages = pages;
+                .success(function(website) {
+                    vm.pages = website.pages;
                 })
                 .error(function(error) {
 
@@ -91,7 +90,7 @@
             var promise = PageService.findPageById(vm.pageId);
             promise
                 .success(function(page) {
-                    if(page !== "0") {
+                    if(page) {
                         vm.page = page;
                     }
                 })
@@ -105,11 +104,11 @@
             var promise = PageService.deletePage(pageId);
             promise
                 .success(function(status) {
-                    if(status === "200") {
+                    if(status) {
                         var promise2 = PageService.findPageByWebsiteId(vm.websiteId);
                         promise2
-                            .success(function(pages) {
-                                vm.pages = pages;
+                            .success(function(website) {
+                                vm.pages = website.pages;
                             })
                             .error(function(error) {
 
@@ -127,11 +126,11 @@
             var promise = PageService.updatePage(vm.pageId, page);
             promise
                 .success(function(status) {
-                    if(status === "200") {
+                    if(status) {
                         var promise2 = PageService.findPageByWebsiteId(vm.websiteId);
                         promise2
-                            .success(function(pages) {
-                                vm.pages = pages;
+                            .success(function(website) {
+                                vm.pages = website.pages;
                             })
                             .error(function(error) {
 

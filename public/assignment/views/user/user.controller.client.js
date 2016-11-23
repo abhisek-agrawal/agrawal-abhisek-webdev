@@ -13,7 +13,7 @@
             var promise = UserService.findUserByCredentials(user.username, user.password);
             promise
                 .success(function(user) {
-                    if(user === "0"){
+                    if(user === ""){
                         Materialize.toast('Unable to login!', 4000);
                     } else {
                         $location.url("/user/" + user._id);
@@ -32,18 +32,14 @@
         function register(user) {
             if(user.password === user.verifyPassword) {
                 var u = {
-                    _id: (new Date()).getTime().toString(),
                     username: user.username,
-                    password: user.password,
-                    firstName: "",
-                    lastName: "",
-                    email: ""
+                    password: user.password
                 };
                 var promise = UserService.createUser(u);
                 promise
-                    .success(function(status) {
-                        if(status === 200) {
-                            $location.url("/user/" + u._id);
+                    .success(function(user) {
+                        if(user) {
+                            $location.url("/user/" + user._id);
                         }
                     })
                     .error(function(error) {
@@ -55,10 +51,11 @@
         }
     }
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, UserService, $location) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.updateProfile = updateProfile;
+        vm.deleteUser = deleteUser;
 
         function init() {
             var promise = UserService.findUserById(vm.userId);
@@ -78,9 +75,19 @@
             var promise = UserService.updateUser(vm.userId, user);
             promise
                 .success(function(status) {
-                    if(status === "200") {
-                        Materialize.toast('Profile saved!', 4000);
-                    }
+                    Materialize.toast('Profile saved!', 4000);
+                })
+                .error(function(error) {
+
+                });
+        }
+
+        function deleteUser() {
+            var promise = UserService.deleteUser(vm.userId);
+            promise
+                .success(function(status) {
+                    Materialize.toast('User unregistered!', 4000);
+                    $location.url("/");
                 })
                 .error(function(error) {
 

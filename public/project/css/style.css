@@ -224,3 +224,53 @@ img.donor-card{ z-index: -1; }
     .navbar-default .navbar-toggle{ border-color: transparent; }
     .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{ background-color: transparent; }
 }
+
+/***********************************************/
+/* Search                                      */
+/***********************************************/
+
+.search-input{
+    padding: 10px 0;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-bottom: 1px solid #FAF9F9;
+}
+
+.search-input span{
+    font-size: 30px;
+    color: rgba(250,249,249,0.7);
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.search-input input{
+    background: none;
+    border: none;
+    box-shadow: none;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 40px;
+    color: #FAF9F9;
+    border-radius: 0;
+    padding: 10px 0;
+}
+
+.search-input input:focus{ outline: none; border: none; box-shadow: none; }
+
+.search-input input::-webkit-input-placeholder { color: rgba(250,249,249,0.7); }
+.search-input input::-moz-placeholder { color: rgba(250,249,249,0.7); }
+.search-input input:-ms-input-placeholder { color: rgba(250,249,249,0.7); }
+.search-input input:-moz-placeholder { color: rgba(250,249,249,0.7); }
+
+.jumbotron>.background-image.search{
+    background: url('../images/red_cross_building.jpg') no-repeat center -70px fixed;
+    -moz-transform: scaleX(1);
+    -o-transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    height: 365px;
+}
+
+@media screen and (min-width: 992px) {
+    .jumbotron>.background-image.search{ height: 383px; }
+}

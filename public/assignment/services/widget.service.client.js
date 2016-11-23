@@ -21,7 +21,8 @@
             "updateWidget"          : updateWidget,
             "deleteWidget"          : deleteWidget,
             "sortWidget"            : sortWidget,
-            "uploadImage"           : uploadImage
+            "uploadImage"           : uploadImage,
+            "findLastWidget"        : findLastWidget
         };
         return api;
 
@@ -59,7 +60,12 @@
         
         function uploadImage(widget) {
             var url = "/api/upload";
-            return $http.post(url);
+            return $http.post(url, widget);
+        }
+
+        function findLastWidget(pageId) {
+            var url = '/api/page/' + pageId + '/widget/last';
+            return $http.get(url);
         }
     }
 })();

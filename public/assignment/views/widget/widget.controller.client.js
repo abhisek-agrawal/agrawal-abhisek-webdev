@@ -17,8 +17,8 @@
         function init() {
             var promise = WidgetService.findWidgetsByPageId(vm.pageId);
             promise
-                .success(function(widgets) {
-                    vm.widgets = widgets;
+                .success(function(page) {
+                    vm.widgets = page.widgets;
                 })
                 .error(function(error) {
 
@@ -51,14 +51,20 @@
 
         function createWidget(widgetType) {
             widget = {
-                _id: (new Date()).getTime().toString(),
-                widgetType: widgetType
+                type: widgetType
             };
             var promise = WidgetService.createWidget(vm.pageId, widget);
             promise
                 .success(function(status) {
-                    if(status === "200") {
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id);
+                    if(status) {
+                        var promise2 = WidgetService.findLastWidget(vm.pageId);
+                        promise2
+                            .success(function(w) {
+                                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + w._id);
+                            })
+                            .error(function(error) {
+
+                            });
                     }
                 })
                 .error(function(error) {
@@ -81,7 +87,7 @@
             var promise = WidgetService.findWidgetById(vm.widgetId);
             promise
                 .success(function(widget) {
-                    if(widget !== "0") {
+                    if(widget) {
                         vm.widget = widget;
                     }
                 })
@@ -92,24 +98,75 @@
         init();
 
         function updateWidget(widget) {
-            var promise = WidgetService.updateWidget(vm.widgetId, widget);
-            promise
-                .success(function(status) {
-                    if(status === "200") {
-                        Materialize.toast('Widget saved!', 4000);
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-                    }
-                })
-                .error(function(error) {
+            
+            if('priority' in widget) {
+                // Old widget needs updating
+                var promise = WidgetService.updateWidget(vm.widgetId, widget);
+                promise
+                    .success(function(status) {
+                        if(status) {
+                            Materialize.toast('Widget saved!', 4000);
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                        }
+                    })
+                    .error(function(error) {
 
-                });
+                    });
+            } else {
+                // New widget needs to add priority
+                var promise = WidgetService.findWidgetsByPageId(vm.pageId);
+                promise
+                    .success(function(page) {
+                        if(page.widgets.length === 1){
+                            // Add priority 1
+                            widget.priority = 0;
+                        } else {
+                            // Check highest priority and add one
+                            var highestPriority = -1;
+                            for(var w in page.widgets) {
+                                if(highestPriority < page.widgets[w].priority) {
+                                    highestPriority = page.widgets[w].priority;
+                                }
+                            }
+                            widget.priority = highestPriority + 1;
+                        }
+
+                        var promise2 = WidgetService.updateWidget(vm.widgetId, widget);
+                        promise2
+                            .success(function(status) {
+                                if(status) {
+                                    Materialize.toast('Widget saved!', 4000);
+                                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                                }
+                            })
+                            .error(function(error) {
+
+                            })
+
+                    })
+                    .error(function(error) {
+
+                    })
+            }
+
+            // var promise = WidgetService.updateWidget(vm.widgetId, widget);
+            // promise
+            //     .success(function(status) {
+            //         if(status) {
+            //             Materialize.toast('Widget saved!', 4000);
+            //             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+            //         }
+            //     })
+            //     .error(function(error) {
+
+            //     });
         }
 
         function deleteWidget(widgetId) {
             var promise = WidgetService.deleteWidget(widgetId);
             promise
                 .success(function(status) {
-                    if(status === "200") {
+                    if(status) {
                         Materialize.toast('Widget deleted!', 4000);
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                     }
