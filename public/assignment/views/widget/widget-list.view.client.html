@@ -27,8 +27,13 @@
             <div ng-switch-when="HTML">
                 <div ng-bind-html="model.safeHtml(widget.text)"></div>
             </div>
-            <div ng-switch-when="YOUTUBE">
+            <div ng-switch-when="YOUTUBE" class="youtube-widget">
                 <iframe width="{{widget.width}}" ng-src="{{model.checkSafeYoutubeUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div ng-switch-when="TEXT" class="input-field">
+                <div ng-if="widget.formatted" ng-model="widget.text" text-angular ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'], ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'], ['indent','outdent'],['html']]"></div>
+                <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)" placeholder="{{widget.placeholder}}" class="validate"/>
+                <textarea ng-if="!widget.formatted && (widget.rows > 1)" rows="{{widget.rows}}" placeholder="{{widget.placeholder}}" class="validate">{{widget.text}}</textarea>
             </div>
         </div>
         <div class="edit-and-order-icons">

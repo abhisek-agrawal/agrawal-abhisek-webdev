@@ -25,8 +25,8 @@
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <input name="widgetType" ng-model="model.widget.type" id="name" type="text" class="validate">
-            <label class="active" for="name">Name</label>
+            <input name="widgetType" ng-model="model.widget.type" id="name" type="text" class="validate" disabled>
+            <label class="active" for="name">Type</label>
         </div>
     </div>
     <div class="row">
@@ -56,6 +56,11 @@
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload file">
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <a ng-click="model.searchImage()" class="green waves-effect waves-light btn-large">Search</a>
         </div>
     </div>
     <div class="row">

@@ -1,0 +1,36 @@
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper blue">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}" class="brand-logo left left-margin-10">&lt;</a>
+            <a class="brand-logo left left-margin-40">Search Flickr</a>
+        </div>
+    </nav>
+</div>
+
+<div class="container top-margin">
+    <div class="row">
+        <div class="input-field col s9">
+            <input ng-model="model.searchText" id="text" type="text" class="validate" value="Search for images">
+            <label for="text">Search</label>
+        </div>
+        <div class="input-field col s3">
+            <a ng-click="model.searchPhotos(model.searchText)" class="green waves-effect waves-light btn-large">Search</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s3" ng-repeat="photo in model.photos.photo">
+            <img ng-click="model.selectPhoto(photo)" ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
+        </div>
+    </div>
+</div>
+
+<div class="navbar-fixed bottom">
+    <nav>
+        <div class="nav-wrapper blue">
+            <ul id="nav-mobile" class="right">
+                <li><a href="#/user/{{model.userId}}"><i class="large material-icons">perm_identity</i></a></li>
+            </ul>
+        </div>
+    </nav>
+</div>

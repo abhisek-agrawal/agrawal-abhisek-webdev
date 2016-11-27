@@ -82,6 +82,7 @@
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
         vm.uploadImage = uploadImage;
+        vm.searchImage = searchImage;
 
         function init() {
             var promise = WidgetService.findWidgetById(vm.widgetId);
@@ -148,18 +149,6 @@
 
                     })
             }
-
-            // var promise = WidgetService.updateWidget(vm.widgetId, widget);
-            // promise
-            //     .success(function(status) {
-            //         if(status) {
-            //             Materialize.toast('Widget saved!', 4000);
-            //             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-            //         }
-            //     })
-            //     .error(function(error) {
-
-            //     });
         }
 
         function deleteWidget(widgetId) {
@@ -189,6 +178,10 @@
             } else {
                 Materialize.toast('No file selected!', 4000);
             }
+        }
+
+        function searchImage() {
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId + "/search");
         }
     }
 })();
