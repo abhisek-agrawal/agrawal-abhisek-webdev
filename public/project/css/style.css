@@ -5,10 +5,12 @@
 body{ background-color: #FAF9F9; }
 
 h1, h2, h3, h4, h5, h6{
+    color: #928186;
     font-family: 'Syncopate', sans-serif;
 }
 
 p, a, input, span{
+    color: #928186;
     font-family: 'Abel', sans-serif;
 }
 
@@ -18,6 +20,8 @@ a{
     -o-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
 }
+
+hr{ border-top: 1px solid #E9E8E8; }
 
 a:hover{ 
     opacity: 0.7;
@@ -32,6 +36,32 @@ img{
     max-width: 100%;
     height: auto;
 }
+
+/* when hiding the thing */
+.ng-hide-add{ 
+    animation:0.5s lightSpeedOut ease;
+}
+
+/* when showing the thing */
+.ng-hide-remove{ 
+    animation:0.5s flipInX ease;
+}
+
+.show-hide-recipient, .show-hide-donor{
+    -webkit-transition: all ease-out 0.5s;
+    -moz-transition: all ease-out 0.5s;
+    -ms-transition: all ease-out 0.5s;
+    -o-transition: all ease-out 0.5s;
+    transition: all ease-out 0.5s;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.show-hide-recipient.ng-hide, .show-hide-donor.ng-hide{
+    height: 0;
+}
+
+.enable-top-margin{ margin-top: 15px; }
 
 /***********************************************/
 /* Home                                        */
@@ -77,6 +107,10 @@ img{
 
 .user-action .form-group{ margin-bottom: 0; }
 
+.show-hide-donor{ height: 313px; }
+
+.show-hide-recipient{ height: 270px; }
+
 .user-action p{
     color: #928186;
     margin-bottom: 2px;
@@ -98,15 +132,13 @@ img{
     background-color: #E9E8E8;
 }
 
-.user-action .center{ margin: 18px 0; }
-
 .user-action .user-icon{
     background-color: #63CCA0;
     padding: 12px;
     border-radius: 50%;
 }
 
-.user-action input{
+.user-action input, .sign-in-action input{
     width: 100%;
     border-radius: 0;
     background-color: #FAF9F9;
@@ -116,9 +148,7 @@ img{
 
 .user-action .disable-padding-left{ padding-left: 0; }
 
-.user-action .enable-top-margin{ margin-top: 15px; }
-
-.user-action .btn{
+.user-action .btn, .sign-in-action .btn{
     background-color: #63CCA0;
     border-radius: 0;
     color: #FAF9F9;
@@ -273,4 +303,28 @@ img.donor-card{ z-index: -1; }
 
 @media screen and (min-width: 992px) {
     .jumbotron>.background-image.search{ height: 383px; }
+}
+
+/***********************************************/
+/* Sign In                                     */
+/***********************************************/
+
+.jumbotron.sign-in{
+    margin-bottom: 0;
+    padding-bottom: 10px;
+}
+
+.jumbotron.sign-in .navbar{ margin-bottom: 0; }
+
+.sign-in-header{ margin-top: 50px; }
+
+.sign-in-action .col-md-6:nth-child(1){ border-right: 1px solid #E9E8E8; }
+
+.sign-in-action .btn{ text-align: right; }
+
+@media screen and (max-width: 991px) {
+    .sign-in-action .col-md-6:nth-child(1){
+        border-right: none;
+        border-bottom: 1px solid #E9E8E8;
+    }
 }

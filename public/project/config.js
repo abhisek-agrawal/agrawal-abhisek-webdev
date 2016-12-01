@@ -5,14 +5,21 @@
 
     function Config($routeProvider) {
         $routeProvider
-            .when("/", {
-                templateUrl: "views/user/home.view.client.html"
+            .when("/home", {
+                templateUrl: "views/user/home.view.client.html",
+                controller: "RegisterController",
+                controllerAs: "model"
             })
             .when("/search", {
-                templateUrl: "views/search/search.view.client.html"
+                templateUrl: "views/search/search.view.client.html",
+                controller: "SearchController",
+                controllerAs: "model"
+            })
+            .when("/signin", {
+                templateUrl: "views/user/signin.view.client.html"
             })
             .otherwise({
-                redirectTo: "/"
+                redirectTo: "/home"
             });
     }
 })();
