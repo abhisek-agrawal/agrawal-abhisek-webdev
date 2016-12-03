@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron search">
     <div class="background-image search"></div>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -30,6 +30,48 @@
             <div class="col-md-10 col-md-offset-1 form-group move-down search-input">
                 <input ng-enter="model.search()" class="form-control" id="Autocomplete" ng-autocomplete="result2" details="details2" options="options2" type="text" name="city" placeholder=" Find a city" autofocus>
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="model.showMap" id="map"></div>
+
+<div ng-hide="model.showMap" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="bigger-p">Enter a city to find places where you can donate blood.</p>
+        </div>
+    </div>
+</div>
+
+<div ng-show="model.showMap" class="container search-places">
+    <div class="row">
+        <div class="col-md-3 col-sm-6" ng-repeat="place in model.places">
+            <div class="crop">
+                <img ng-src="{{model.checkSafeImageUrl(place.image)}}" alt="Place Image">    
+            </div>
+            <div class="place-info">
+                <p>{{place.name}}</p>
+                <span style="margin-bottom: 10px;">{{place.formatted_address}}</span>
+                <span>Phone : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{place.international_phone_number}}</span>
+                <span>Directions : &nbsp;&nbsp;<a target="_blank" ng-href="{{place.url}}">Open in Google Maps</a></span>
+                <span>Website : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" ng-href="{{place.website}}">Open Website</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><span class="donor-color">1,256</span> donors, <span class="org-color">157</span> organizations</p>
+                <ul class="list-inline">
+                    <li><a href="#/"><img src="images/facebook.svg" alt="facebook"></a></li>
+                    <li><a href="#/"><img src="images/twitter.svg" alt="twitter"></a></li>
+                    <li><a href="#/"><img src="images/instagram.svg" alt="instagram"></a></li>
+                </ul>
             </div>
         </div>
     </div>

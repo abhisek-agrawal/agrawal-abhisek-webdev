@@ -44,42 +44,42 @@
                             </div>
                             <div class="col-xs-8 col-sm-10 col-md-9">
                                 <p class="recipient-margin">Become a recipient</p>
-                                <a class="show-hide-recipient" ng-click="model.changeUser()" ng-show="model.donor">Sign Up</a>
+                                <a class="show-hide-recipient" ng-click="model.changeUser()" ng-show="model.isDonor">Sign Up</a>
                             </div>
-                            <div class="col-xs-12 show-hide-recipient" ng-hide="model.donor">
+                            <div class="col-xs-12 show-hide-recipient" ng-hide="model.isDonor">
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="company">Company, Organization or Institution</label>
-                                        <input type="text" class="form-control" id="company" placeholder="Company, Organization or Institution">
+                                        <input ng-model="model.recipient.company" type="text" class="form-control" id="company" placeholder="Company, Organization or Institution">
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email">
+                                        <input ng-model="model.recipient.email" type="email" class="form-control" id="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="phone">Phone</label>
-                                        <input type="text" class="form-control" id="phone" placeholder="Phone">
+                                        <input ng-model="model.recipient.phone" type="text" class="form-control" id="phone" placeholder="Phone">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="createPassword">Create Passord</label>
-                                        <input type="password" class="form-control" id="createPassword" placeholder="Create Password">
+                                        <input ng-model="model.recipient.password" type="password" class="form-control" id="createPassword" placeholder="Create Password">
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
-                                        <label class="sr-only" for="city">City</label>
-                                        <input type="text" class="form-control" id="city" placeholder="City">
+                                        <label class="sr-only" for="Autocomplete">City</label>
+                                        <input ng-model="model.recipient.city" type="text" class="form-control recipient-city" id="Autocomplete" placeholder="City" ng-autocomplete="result2" details="details2" options="options2" name="city">
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
-                                        <a class="btn btn-block btn-success" href="#/">Become a recipient</a>
+                                        <a class="btn btn-block btn-success" href="#/" ng-click="model.registerRecipient(model.recipient)">Become a recipient</a>
                                     </div>
                                 </div>
                             </div>
@@ -100,52 +100,62 @@
                             </div>
                             <div class="col-xs-8 col-sm-10 col-md-9">
                                 <p class="donor-margin">Become a donor</p>
-                                <a class="show-hide-donor" ng-click="model.changeUser()" ng-hide="model.donor">Sign Up</a>
+                                <a class="show-hide-donor" ng-click="model.changeUser()" ng-hide="model.isDonor">Sign Up</a>
                             </div>
-                            <div class="col-xs-12 show-hide-donor" ng-show="model.donor">
+                            <div class="col-xs-12 show-hide-donor" ng-show="model.isDonor">
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-6 disable-padding-right">
                                         <label class="sr-only" for="firstName">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                                        <input ng-model="model.donor.firstName" type="text" class="form-control" id="firstName" placeholder="First Name">
                                     </div>
                                     <div class="col-xs-6 disable-padding-left">
                                         <label class="sr-only" for="lastName">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                                        <input ng-model="model.donor.lastName" type="text" class="form-control" id="lastName" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email">
+                                        <input ng-model="model.donor.email" type="email" class="form-control" id="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="phone">Phone</label>
-                                        <input type="text" class="form-control" id="phone" placeholder="Phone">
+                                        <input ng-model="model.donor.phone" type="text" class="form-control" id="phone" placeholder="Phone">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="createPassword">Create Passord</label>
-                                        <input type="password" class="form-control" id="createPassword" placeholder="Create Password">
+                                        <input ng-model="model.donor.password" type="password" class="form-control" id="createPassword" placeholder="Create Password">
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
-                                        <label class="sr-only" for="city">City</label>
-                                        <input type="text" class="form-control" id="city" placeholder="City">
+                                        <label class="sr-only" for="Autocomplete">City</label>
+                                        <input ng-model="model.donor.city" type="text" class="form-control donor-city" id="Autocomplete" placeholder="City" ng-autocomplete="result2" details="details2" options="options2" name="city">
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="bloodType">Blood Type</label>
-                                        <input type="text" class="form-control" id="bloodType" placeholder="Blood Type">
+                                        <select ng-model="model.donor.bloodType" class="form-control" id="bloodType">
+                                            <option value="" selected disabled>Blood Type</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
-                                        <a class="btn btn-block btn-success" href="#/">Become a donor</a>
+                                        <a class="btn btn-block btn-success" href="#/" ng-click="model.registerDonor(model.donor)">Become a donor</a>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +174,7 @@
             <img class="donor-card" src="images/donor-card.png" alt="donor card">
         </div>
         <div class="col-md-5">
-            <p class="donor-para">We are a community of donors that aim to solve the problem of blood shortage. The only way to do so through voluntary blood donations.</p>
+            <p class="donor-para">We are a community of donors that aim to solve the problem of blood shortage. The only way to do so is through voluntary blood donations.</p>
         </div>
     </div>
 </div>

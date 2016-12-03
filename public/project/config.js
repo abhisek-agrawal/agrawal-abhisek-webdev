@@ -16,7 +16,9 @@
                 controllerAs: "model"
             })
             .when("/signin", {
-                templateUrl: "views/user/signin.view.client.html"
+                templateUrl: "views/user/signin.view.client.html",
+                controller: "SigninController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home"

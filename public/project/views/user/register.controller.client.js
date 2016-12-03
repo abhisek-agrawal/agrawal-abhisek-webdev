@@ -5,8 +5,11 @@
 
     function RegisterController($location) {
         var vm = this;
-        vm.donor = true;
         vm.changeUser = changeUser;
+        vm.registerRecipient = registerRecipient;
+        vm.registerDonor = registerDonor;
+
+        vm.isDonor = true;
 
         function init() {
             $(".donor-margin").css("margin", "18px 0px");
@@ -14,15 +17,25 @@
         init();
 
         function changeUser() {
-            if(vm.donor === true) {
-                vm.donor = false;
+            if(vm.isDonor === true) {
+                vm.isDonor = false;
                 $(".donor-margin").animate({ margin: "0px 0px" }, 500);
                 $(".recipient-margin").animate({ margin: "18px 0px" }, 500);
             } else {
-                vm.donor = true;
+                vm.isDonor = true;
                 $(".recipient-margin").animate({ margin: "0px 0px" }, 500);
                 $(".donor-margin").animate({ margin: "18px 0px" }, 500);
             }
+        }
+
+        function registerRecipient(recipient) {
+            recipient.city = $('.recipient-city').val();
+            console.log(recipient);
+        }
+
+        function registerDonor(donor) {
+            donor.city = $('.donor-city').val();
+            console.log(donor);
         }
     }
 })();
