@@ -39,31 +39,35 @@
         init();
 
         function createWebsite(website) {
-            w = {
-                name: website.name,
-                description: website.description
-            };
-            var promise = WebsiteService.createWebsite(vm.userId, w);
-            promise
-                .success(function(status) {
-                    if(status) {
-                        var promise2 = WebsiteService.findWebsiteById(w._id);
-                        promise2
-                            .success(function(website) {
-                                if(website) {
-                                    vm.websites.push(website);
-                                }
-                            })
-                            .error(function(error) {
+            if(website.name) {
+                w = {
+                    name: website.name,
+                    description: website.description
+                };
+                var promise = WebsiteService.createWebsite(vm.userId, w);
+                promise
+                    .success(function(status) {
+                        if(status) {
+                            var promise2 = WebsiteService.findWebsiteById(w._id);
+                            promise2
+                                .success(function(website) {
+                                    if(website) {
+                                        vm.websites.push(website);
+                                    }
+                                })
+                                .error(function(error) {
 
-                            });
-                        Materialize.toast('New website created!', 4000);
-                        $location.url("/user/" + vm.userId + "/website");
-                    }
-                })
-                .error(function(error) {
+                                });
+                            Materialize.toast('New website created!', 4000);
+                            $location.url("/user/" + vm.userId + "/website");
+                        }
+                    })
+                    .error(function(error) {
 
-                });
+                    });
+            } else {
+                Materialize.toast('Please fill in the name.', 4000);
+            }
         }
     }
 
@@ -120,25 +124,29 @@
         }
 
         function updateWebsite(website) {
-            var promise = WebsiteService.updateWebsite(vm.websiteId, website);
-            promise
-                .success(function(status) {
-                    if(status) {
-                        var promise2 = WebsiteService.findWebsitesByUser(vm.userId);
-                        promise2
-                            .success(function(user) {
-                                vm.websites = user.websites;
-                            })
-                            .error(function(error) {
+            if(website.name) {
+                var promise = WebsiteService.updateWebsite(vm.websiteId, website);
+                promise
+                    .success(function(status) {
+                        if(status) {
+                            var promise2 = WebsiteService.findWebsitesByUser(vm.userId);
+                            promise2
+                                .success(function(user) {
+                                    vm.websites = user.websites;
+                                })
+                                .error(function(error) {
 
-                            })
-                        Materialize.toast('Website saved!', 4000);
-                        $location.url("/user/" + vm.userId + "/website");
-                    }
-                })
-                .error(function(error) {
+                                })
+                            Materialize.toast('Website saved!', 4000);
+                            $location.url("/user/" + vm.userId + "/website");
+                        }
+                    })
+                    .error(function(error) {
 
-                })
+                    })
+            } else {
+                Materialize.toast('Please fill in name.', 4000);
+            }
         }
     }
 })();

@@ -15,6 +15,7 @@ module.exports = function () {
         updateUser              : updateUser,
         deleteUser              : deleteUser,
         findAllWebsitesForUser  : findAllWebsitesForUser,
+        findUserByFacebookId    : findUserByFacebookId,
         setModel                : setModel
     };
     return api;
@@ -65,6 +66,10 @@ module.exports = function () {
             .findById(userId)
             .populate("websites", "name")
             .exec();
+    }
+
+    function findUserByFacebookId(facebookId) {
+        return UserModel.findOne({'facebook.id': facebookId});
     }
 
     function setModel(_model) {

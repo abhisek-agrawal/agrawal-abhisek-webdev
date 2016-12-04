@@ -5,64 +5,75 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController);
 
-    function LoginController($location, UserService) {
+    function LoginController($rootScope, $location, UserService) {
         var vm = this;
         vm.login = login;
 
         function login(user) {
-            var promise = UserService.findUserByCredentials(user.username, user.password);
-            promise
-                .success(function(user) {
-                    if(user === ""){
-                        Materialize.toast('Unable to login!', 4000);
-                    } else {
-                        $location.url("/user/" + user._id);
-                    }
-                })
-                .error(function(error) {
-
-                });
-        }
-    }
-
-    function RegisterController($location, UserService) {
-        var vm = this;
-        vm.register = register;
-
-        function register(user) {
-            if(user.password === user.verifyPassword) {
-                var u = {
-                    username: user.username,
-                    password: user.password
-                };
-                var promise = UserService.createUser(u);
+            if(user.username && user.password) {
+                var promise = UserService.login(user);
                 promise
-                    .success(function(user) {
-                        if(user) {
+                    .then(
+                        function(response) {
+                            var user = response.data;
+                            $rootScope.currentUser = user;
                             $location.url("/user/" + user._id);
+                        },
+                        function(err) {
+                            Materialize.toast('Unable to login!', 4000);
                         }
-                    })
-                    .error(function(error) {
-
-                    });
+                    );
             } else {
-                Materialize.toast('Passwords do not match!', 4000);
+                Materialize.toast('Please fill in both fields.', 4000);
             }
         }
     }
 
-    function ProfileController($routeParams, UserService, $location) {
+    function RegisterController($rootScope, $location, UserService) {
         var vm = this;
-        vm.userId = $routeParams["uid"];
+        vm.register = register;
+
+        function register(user) {
+            if(user && user.username && user.password && user.verifyPassword) {
+                if(user.password === user.verifyPassword) {
+                    var u = {
+                        username: user.username,
+                        password: user.password
+                    };
+                    var promise = UserService.register(u);
+                    promise
+                        .then(
+                            function(response) {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/user/" + user._id);
+                            },
+                            function(err) {
+                                Materialize.toast('Unable to register!', 4000);
+                            }
+                        );
+                } else {
+                    Materialize.toast('Passwords do not match!', 4000);
+                }
+            } else {
+                Materialize.toast('Please fill in all the fields.', 4000);
+            }
+        }
+    }
+
+    function ProfileController($rootScope, $routeParams, UserService, $location) {
+        var vm = this;
         vm.updateProfile = updateProfile;
+        vm.logout = logout;
         vm.deleteUser = deleteUser;
 
         function init() {
-            var promise = UserService.findUserById(vm.userId);
+            var promise = UserService.findUser();
             promise
                 .success(function(user) {
                     if(user !== "0") {
                         vm.user = user;
+                        vm.userId = user._id;
                     }
                 })
                 .error(function(error) {
@@ -72,7 +83,7 @@
         init();
 
         function updateProfile(user) {
-            var promise = UserService.updateUser(vm.userId, user);
+            var promise = UserService.updateUser(vm.user._id, user);
             promise
                 .success(function(status) {
                     Materialize.toast('Profile saved!', 4000);
@@ -82,8 +93,22 @@
                 });
         }
 
+        function logout() {
+            var promise = UserService.logout();
+            promise
+                .then(
+                    function(response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/");
+                    },
+                    function(err) {
+                        Materialize.toast('Unable to logout!', 4000);
+                    }
+                );
+        }
+
         function deleteUser() {
-            var promise = UserService.deleteUser(vm.userId);
+            var promise = UserService.deleteUser(vm.user._id);
             promise
                 .success(function(status) {
                     Materialize.toast('User unregistered!', 4000);

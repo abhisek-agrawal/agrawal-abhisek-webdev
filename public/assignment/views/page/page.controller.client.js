@@ -41,31 +41,35 @@
         init();
 
         function createPage(page) {
-            p = {
-                name: page.name,
-                description: page.description
-            };
-            var promise = PageService.createPage(vm.websiteId, p);
-            promise
-                .success(function(status) {
-                    if(status) {
-                        var promise2 = PageService.findPageById(p._id);
-                        promise2
-                            .success(function(page) {
-                                if(page) {
-                                    vm.pages.push(page);
-                                }
-                            })
-                            .error(function(error) {
+            if(page.name) {
+                p = {
+                    name: page.name,
+                    description: page.description
+                };
+                var promise = PageService.createPage(vm.websiteId, p);
+                promise
+                    .success(function(status) {
+                        if(status) {
+                            var promise2 = PageService.findPageById(p._id);
+                            promise2
+                                .success(function(page) {
+                                    if(page) {
+                                        vm.pages.push(page);
+                                    }
+                                })
+                                .error(function(error) {
 
-                            });
-                        Materialize.toast('New page created!', 4000);
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                    }
-                })
-                .error(function(error) {
+                                });
+                            Materialize.toast('New page created!', 4000);
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                        }
+                    })
+                    .error(function(error) {
 
-                });
+                    });
+            } else {
+                Materialize.toast('Please fill in the name.', 4000);
+            }
         }
     }
 
@@ -123,25 +127,29 @@
         }
 
         function updatePage(page) {
-            var promise = PageService.updatePage(vm.pageId, page);
-            promise
-                .success(function(status) {
-                    if(status) {
-                        var promise2 = PageService.findPageByWebsiteId(vm.websiteId);
-                        promise2
-                            .success(function(website) {
-                                vm.pages = website.pages;
-                            })
-                            .error(function(error) {
+            if(page.name) {
+                var promise = PageService.updatePage(vm.pageId, page);
+                promise
+                    .success(function(status) {
+                        if(status) {
+                            var promise2 = PageService.findPageByWebsiteId(vm.websiteId);
+                            promise2
+                                .success(function(website) {
+                                    vm.pages = website.pages;
+                                })
+                                .error(function(error) {
 
-                            })
-                        Materialize.toast('Page saved!', 4000);
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                    }
-                })
-                .error(function(error) {
+                                })
+                            Materialize.toast('Page saved!', 4000);
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                        }
+                    })
+                    .error(function(error) {
 
-                })
+                    })
+            } else {
+                Materialize.toast('Please fill in name.', 4000);
+            }
         }
     }
 })();
