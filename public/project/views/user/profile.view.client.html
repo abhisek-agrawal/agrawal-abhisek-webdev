@@ -1,0 +1,171 @@
+<nav class="navbar navbar-default logged-in">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/newsfeed">
+                <img alt="LifeDrops" src="images/LifeDrops_Logo2.png">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="model.currentUser.type == 'Recipient'"><a href="#/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#/user/{{model.currentUser._id}}"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <!-- Main profile header -->
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <div class="col-xs-4 col-md-3">
+                    <img ng-src="{{model.checkSafeImageUrl(model.user.profileImage)}}" alt="profile image" class="profile-image">
+                    <form class="upload-file" ng-show="model.isCurrentUser()" action="/project/api/upload" method="post" enctype="multipart/form-data">
+                        <input ng-model="model.currentUser._id" type="text" name="userId" style="display:none;">
+                        <input type="file" name="myFile" id="file" class="inputfile" />
+                        <label for="file"><i class="fa fa-upload" aria-hidden="true"></i></label>
+                        <button type="submit" class="btn btn-primary upload-button">Upload</button>
+                    </form>
+                </div>
+                <div class="col-xs-8 col-md-9">
+                    <span ng-hide="model.user.type == 'Recipient'" class="profile-name">{{model.user.firstName}} {{model.user.lastName}}</span>
+                    <span ng-show="model.user.type == 'Recipient'" class="profile-name">{{model.user.institution}}</span>
+                    <span class="follow">{{model.user.follows.length}}</span>
+                    <span ng-show="model.user.type == 'Recipient'" class="follow" style="margin-left:0;">followers</span>
+                    <span ng-hide="model.user.type == 'Recipient'" class="follow" style="margin-left:0;">following</span>
+                    <a ng-show="model.isCurrentUser()" class="btn btn-primary profile-button" href="#/user/{{model.currentUser._id}}/edit">Edit Profile</a>
+                    <a ng-show="model.isCurrentUser()" class="btn btn-danger profile-button" ng-click="model.logout()">Logout</a>
+                    <a ng-show="!model.isCurrentUser() && model.user.type == 'Recipient' && !model.currentUserIsFollowing" class="btn btn-success profile-button" ng-click="model.follow()">Follow</a>
+                    <a ng-show="!model.isCurrentUser() && model.user.type == 'Recipient' && model.currentUserIsFollowing" class="btn btn-danger profile-button" ng-click="model.unFollow()">Unfollow</a>
+                    <a class="profile-icon" href="#/"><i class="fa fa-cog" aria-hidden="true" style="color:#337ab7"></i></a>
+                    <a class="profile-icon" href="#/"><i class="fa fa-power-off" aria-hidden="true" style="color:#d9534f"></i></a>
+                    <div class="clearfix"></div>
+                    <p class="profile-info">{{model.user.introduction}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sidebar and posts -->
+    <div class="row enable-top-margin-30">
+        <div class="col-md-3 col-md-offset-2">
+            <p ng-hide="model.user.type == 'Recipient'"><strong>Blood Type</strong> : {{model.user.bloodType}}</p>
+            <p><strong>City</strong> : {{model.user.city}}</p>
+            <p><strong>Phone</strong> : {{model.user.phone}}</p>
+            <p ng-hide="model.user.type == 'Recipient'"><strong>Birth Date</strong> : {{model.user.birthDate}}</p>
+            <a ng-show="!model.isCurrentUser() && model.currentUser.type == 'Donor'" class="btn btn-primary btn-block" href="#/recipient/{{model.user._id}}/appointment">Make appointment</a>
+        </div>
+        <div class="col-md-5">
+
+            <div ng-show="model.isCurrentUser() && model.user.type == 'Donor' && model.appointments.length == 0" class="feed-post">
+                <div class="text">
+                    <p>Make appointments by following recipients and scheduling appointments from their profile page.</p>
+                </div>
+            </div>
+
+            <div ng-show="model.isCurrentUser() && model.user.type == 'Recipient' && model.posts.length == 0" class="feed-post">
+                <div class="text">
+                    <p>Create posts to let your followers know you are accepting donations.</p>
+                </div>
+            </div>
+
+            <div ng-show="model.user.type == 'Recipient'" class="feed-post" ng-repeat="post in model.posts | orderBy:'dateCreated':true">
+                <a ng-show="model.isCurrentUser()" ng-click="model.deletePost(post._id)" class="delete-button">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <div class="info">
+                    <img ng-src="{{model.checkSafeImageUrl(post._user.profileImage)}}" alt="profile">
+                    <p class="name">
+                        <a href="#/user/{{post._user._id}}">{{post._user.institution}}</a>
+                    </p>
+                    <p class="date">{{post.dateCreated}}</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="image">
+                    <img ng-show="post.image" ng-src="{{model.checkSafeImageUrl(post.image)}}" alt="post image">
+                </div>
+                <div class="text">
+                    <p>{{post.text}}</p>
+                </div>
+                <hr>
+                <div class="comment">
+                    <a href="#/post/{{post._id}}"><p class="pull-left"><i class="fa fa-comment-o" aria-hidden="true"></i> Add a comment ...</p></a>
+                    <a href="#/post/{{post._id}}"><p class="pull-right">{{post.comments.length}} comments</p></a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            
+            <div ng-show="model.currentUser.type == 'Donor'" class="feed-post" ng-repeat="appointment in model.appointments | orderBy:'dateCreated':true">
+                <div class="info">
+                    <img ng-src="{{model.checkSafeImageUrl(appointment._recipient.profileImage)}}" alt="profile">
+                    <p class="name">
+                        <a href="#/user/{{appointment._recipient._id}}">{{appointment._recipient.institution}}</a>
+                    </p>
+                    <p class="date">{{appointment.dateCreated}}</p>
+                    <div class="clearfix"></div>
+                </div>
+                <hr>
+                <div class="appointment">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>{{appointment.date}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>{{appointment.time}}</p>
+                        </div>
+                        <div class="col-md-4" ng-if="model.currentUser._id == appointment._recipient._id && appointment.status == 'Pending'">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a class="btn btn-block btn-success" ng-click="model.updateAppointment(appointment._id, 'Approved')"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a class="btn btn-block btn-danger" ng-click="model.updateAppointment(appointment._id, 'Declined')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-if="model.currentUser._id != appointment._recipient._id && appointment.status == 'Pending'">
+                            <a class="btn btn-block btn-default" href="#/" disabled="disabled">{{appointment.status}}</a>
+                        </div>
+                        <div class="col-md-4" ng-if="appointment.status == 'Approved' || appointment.status == 'Declined'">
+                            <a class="btn btn-block btn-default" href="#/" disabled="disabled">{{appointment.status}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer logged-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><span class="donor-color">1,256</span> donors, <span class="org-color">157</span> organizations</p>
+                <ul class="list-inline">
+                    <li><a href="#/"><img src="images/facebook.svg" alt="facebook"></a></li>
+                    <li><a href="#/"><img src="images/twitter.svg" alt="twitter"></a></li>
+                    <li><a href="#/"><img src="images/instagram.svg" alt="instagram"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>
+
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>

@@ -1,0 +1,80 @@
+<nav class="navbar navbar-default logged-in">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/newsfeed">
+                <img alt="LifeDrops" src="images/LifeDrops_Logo2.png">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="model.currentUser.type == 'Recipient'"><a href="#/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#/user/{{model.currentUser._id}}"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <img ng-show="model.post.image" ng-src="{{model.checkSafeImageUrl(model.post.image)}}" alt="Post Image">
+                </div>
+            </div>
+            <div class="row enable-top-margin">
+                <div class="col-md-12">
+                    <div class="post-comments" ng-repeat="comment in model.comments | orderBy:'dateCreated':true">
+                        <span class="comment-date">{{comment.dateCreated}}</span>
+                        <strong ng-show="comment._user.firstName">{{comment._user.firstName}} {{comment._user.lastName}}</strong>
+                        <strong ng-show="comment._user.institution">{{comment._user.institution}}</strong> 
+                        {{comment.comment}}
+                    </div>
+                </div>
+            </div>
+            <div class="row enable-top-margin">
+                <div class="col-md-12">
+                    <textarea ng-model="model.comment.comment" rows="5" class="form-control comment-text" id="comment" placeholder="Add a comment..."></textarea>
+                </div>
+            </div>
+            <div class="row enable-top-margin" style="margin-bottom:168px;">
+                <div class="col-md-4 col-md-offset-8">
+                    <a ng-click="model.createComment(model.comment)" class="btn btn-block btn-success">Add comment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer logged-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><span class="donor-color">1,256</span> donors, <span class="org-color">157</span> organizations</p>
+                <ul class="list-inline">
+                    <li><a href="#/"><img src="images/facebook.svg" alt="facebook"></a></li>
+                    <li><a href="#/"><img src="images/twitter.svg" alt="twitter"></a></li>
+                    <li><a href="#/"><img src="images/instagram.svg" alt="instagram"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>
+
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>

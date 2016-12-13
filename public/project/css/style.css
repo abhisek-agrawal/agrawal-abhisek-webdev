@@ -2,14 +2,20 @@
 /* Miscellaneous                               */
 /***********************************************/
 
-body{ background-color: #FAF9F9; }
+html{ height: 100%; }
+
+body{
+    background-color: #FAF9F9;
+    min-height: 100%;
+    position: relative;
+}
 
 h1, h2, h3, h4, h5, h6{
     color: #928186;
     font-family: 'Syncopate', sans-serif;
 }
 
-p, a, input, span, select{
+p, a, input, span, select, label, textarea, button{
     color: #928186;
     font-family: 'Abel', sans-serif;
 }
@@ -52,6 +58,21 @@ img{
 }
 
 .enable-top-margin{ margin-top: 15px; }
+
+.enable-top-margin-30{ margin-top: 30px; }
+
+.alert{
+    position: fixed;
+    z-index: 1400;
+    top: 10%;
+    right: 4%;
+    margin: 0px auto;
+    text-align: center;
+    border-radius: 0;
+    display: none;
+}
+
+.btn-block{ border-radius: 0; }
 
 /***********************************************/
 /* Home                                        */
@@ -128,7 +149,12 @@ img{
     border-radius: 50%;
 }
 
-.user-action input, .user-action select, .sign-in-action input{
+.user-action input,
+.user-action select,
+.sign-in-action input,
+.tab-pane input,
+.tab-pane select,
+input.appointment{
     width: 100%;
     border-radius: 0;
     background-color: #FAF9F9;
@@ -178,6 +204,7 @@ img.donor-card{ z-index: -1; }
 .footer span.org-color{ color: #77A4EE; }
 
 @media screen and (min-width: 992px) {
+    .user-action{ width: 410px; }
     .jumbotron h2{ margin-top: 220px; }
     .jumbotron>.background-image{ height: 495px; }
     img.donor-card{
@@ -203,12 +230,19 @@ img.donor-card{ z-index: -1; }
 
 /* Navbar */
 
+.navbar-default.logged-in{ margin-bottom: 60px; }
+
 .navbar-default .navbar-nav>li>a,
 .navbar-default .navbar-nav>li>a:hover {
     color: #FAF9F9;
     font-family: 'Syncopate', sans-serif;
     font-weight: bold;
     font-size: 12px;
+}
+
+.navbar-default.logged-in .navbar-nav>li>a{
+    font-size: 33px;
+    text-align: center;
 }
 
 .navbar-default .navbar-nav .special-button{ margin: 7px 0; }
@@ -225,6 +259,19 @@ img.donor-card{ z-index: -1; }
     border: none;
 }
 
+.navbar-default.logged-in{ 
+    background-color: #E95C5A;
+    border-radius: 0;
+    padding: 10px 0;
+}
+
+.navbar-default.logged-in .search-user input{
+    text-align: center;
+    border-radius: 0;
+    border: 0;
+    background-color: #FAF9F9;
+}
+
 .navbar-brand{ padding: 5px 15px; }
 
 .navbar-brand img{
@@ -232,17 +279,38 @@ img.donor-card{ z-index: -1; }
     width: auto;
 }
 
+.tt-menu {
+    text-align: center;
+    margin: 12px 0;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
 @media screen and (max-width: 767px) {
     .navbar-default .navbar-collapse, .navbar-default .navbar-form{
         border-color: #E9E8E8;
         background-color: #E9E8E8;
     }
-
     .navbar-default .navbar-nav>li>a{ color: #E95C5A; }
     .navbar-default .navbar-nav .special-button a{ color: #E9E8E8; }
     .navbar-default .navbar-toggle .icon-bar{ background-color: #E9E8E8; }
     .navbar-default .navbar-toggle{ border-color: transparent; }
     .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{ background-color: transparent; }
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-default.logged-in .search-user{
+        position: absolute;
+        left: 38%;
+        top: 27%;
+    }
+    .navbar-default.logged-in .search-user input{ width: 300px; }
+    .navbar-default.logged-in .navbar-nav>li>a{ padding: 10px 20px; }
 }
 
 /***********************************************/
@@ -398,3 +466,287 @@ img.donor-card{ z-index: -1; }
         border-bottom: 1px solid #E9E8E8;
     }
 }
+
+/***********************************************/
+/* News Feed                                   */
+/***********************************************/
+
+.feed-post{
+    background-color: #E9E8E8;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.feed-post .info,
+.feed-post .text,
+.feed-post .comment,
+.feed-post .appointment{ padding: 15px; }
+
+.feed-post .info img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 15px;
+}
+
+.feed-post .info .name{
+    float: left;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.feed-post .info .date{
+    float: right;
+    margin-top: 13px;
+    font-size: 14px;
+}
+
+.feed-post .text p,
+.feed-post .comment p,
+.feed-post .appointment p{ margin-bottom: 0; }
+
+.feed-post hr{
+    margin: 0 15px;
+    border-color: #928186;
+}
+
+.feed-post:last-child{
+    margin-bottom: 168px;
+}
+
+.footer.logged-in{
+    margin-top: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.feed-post .appointment p{
+    text-align: center;
+    padding: 6px 0;
+}
+
+/***********************************************/
+/* Profile                                     */
+/***********************************************/
+
+.profile-image{
+    border-radius: 50%;
+    height: 165px;
+}
+
+.profile-name{
+    font-size: 34px;
+    margin: 10px;
+    display: block;
+    margin-bottom: 0;
+}
+
+.follow{
+    font-size: 22px;
+    margin: 0 10px;
+}
+
+.follow, .profile-button{
+    float: left;
+}
+
+.profile-icon{ display: none; }
+
+.profile-button {
+    display: inline;
+    border-radius: 0;
+    margin: 0 10px;
+}
+
+.profile-info{
+    font-size: 24px;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 434px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.upload-file{
+    position: absolute;
+    top: -5px;
+    right: 42px;
+}
+
+.upload-file .inputfile{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.upload-file label {
+    background-color: #E95C5A;
+    color: #FAF9F9;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    padding: 2px 6px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.upload-file .upload-button{
+    float: right;
+    padding: 3px 12px;
+    font-size: 12px;
+    border-radius: 0;
+    margin: 0 10px;
+}
+
+.delete-button{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #E95C5A;
+    color: #FAF9F9;
+    border-radius: 50%;
+    width: 21px;
+    height: 21px;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 425px) {
+    .profile-name{
+        font-size: 20px;
+        margin: 0;
+        margin-top: 5px;
+    }
+    .profile-icons{
+        font-size: 24px !important;
+        margin: 0 5px;
+        line-height: 28px !important;
+    }
+    .follow{
+        font-size: 14px;
+        margin-left: 0;
+    }
+    .profile-icon{
+        display: inline;
+        margin: 0 10px;
+    }
+    .profile-button { display: none;}
+    .profile-info{
+        margin: 0;
+        font-size: 16px;
+        width: 183px;
+    }
+    .profile-image{ height: 77px; }
+    .upload-file{ right: 0; }
+}
+
+/***********************************************/
+/* Edit Profile                                */
+/***********************************************/
+
+.nav-tabs a{ cursor: pointer; }
+
+.tab-pane{
+    padding: 30px;
+    margin-bottom: 168px;
+}
+
+.tab-pane label{
+    display: block;
+    text-align: right;
+    line-height: 34px;
+}
+
+.tab-pane input,
+.tab-pane select,
+.tab-pane textarea{ background-color: #FFF; }
+
+.tab-pane .picker select{ width: inherit; }
+
+.tab-pane textarea{ border-radius: 0; }
+
+.tab-pane .btn-block{ border-radius: 0; }
+
+@media screen and (max-width: 991px) {
+    .tab-pane label{ text-align: left; }
+}
+
+/***********************************************/
+/* New Post                                    */
+/***********************************************/
+
+.post-picture-upload input{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.post-picture-upload input + label{
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #FAF9F9;
+    background-color: #E95C5A;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.post-picture-upload input:focus + label,
+.post-picture-upload input + label:hover {
+    background-color: #E95C5A;
+}
+
+.post-picture-upload input:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.post-picture-upload input + label * {
+	pointer-events: none;
+}
+
+.post-picture-upload label span{
+    color: #FAF9F9;
+}
+
+/***********************************************/
+/* New Appointment                             */
+/***********************************************/
+
+label.appointment{
+    text-align: right;
+    display: block;
+    line-height: 34px;
+}
+
+@media screen and (max-width: 991px) {
+    label.appointment{ text-align: left; }
+}
+
+/***********************************************/
+/* New Comment                                 */
+/***********************************************/
+
+textarea.comment-text{ border-radius: 0; }
+
+.comment-date{
+    float: right;
+    background-color: #928186;
+    color: #FAF9F9;
+    border-radius: 10px;
+    padding: 0 5px;
+    opacity: 0.6;
+}
+
+.post-comments{ padding: 5px 0; }

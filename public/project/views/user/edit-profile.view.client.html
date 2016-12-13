@@ -1,0 +1,179 @@
+<nav class="navbar navbar-default logged-in">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/newsfeed">
+                <img alt="LifeDrops" src="images/LifeDrops_Logo2.png">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="model.currentUser.type == 'Recipient'"><a href="#/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#/user/{{model.currentUser._id}}"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container logged-in">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <!-- Tabs Nav -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a data-target="#edit" aria-controls="edit" role="tab" data-toggle="tab">Edit Profile</a></li>
+                    <li role="presentation"><a data-target="#password" aria-controls="password" role="tab" data-toggle="tab">Change Password</a></li>
+                </ul>
+                <!-- Tabs Panes -->
+                <div class="tab-content">
+                    <!-- Edit Profile -->
+                    <div role="tabpanel" class="tab-pane fade in active" id="edit">
+                        <div ng-hide="model.currentUser.type == 'Recipient'" class="row">
+                            <div class="col-md-3">
+                                <label for="firstName">First Name</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.currentUser.firstName" type="text" class="form-control" id="firstName" placeholder="John">
+                            </div>
+                        </div>
+                        <div ng-hide="model.currentUser.type == 'Recipient'" class="row">
+                            <div class="col-md-3">
+                                <label for="lastName">Last Name</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.currentUser.lastName" type="text" class="form-control" id="lastName" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div ng-show="model.currentUser.type == 'Recipient'" class="row">
+                            <div class="col-md-3">
+                                <label for="institution">Institution</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.currentUser.institution" type="text" class="form-control" id="institution" placeholder="Red Cross">
+                            </div>
+                        </div>
+                        <div class="row enable-top-margin-30">
+                            <div class="col-md-3">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.currentUser.email" type="email" class="form-control" id="email" placeholder="john@doe.com">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="phone">Phone</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.currentUser.phone" type="text" class="form-control" id="phone" placeholder="(123) 456-7890">
+                            </div>
+                        </div>
+                        <div class="row enable-top-margin-30">
+                            <div class="col-md-3">
+                                <label for="Autocomplete">City</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control recipient-city ng-pristine ng-valid ng-isolate-scope ng-empty ng-touched" id="Autocomplete" placeholder="Boston, MA, United States" ng-autocomplete="result2" details="details2" options="options2" name="city" value="{{model.currentUser.city}}" autocomplete="off">
+                            </div>
+                        </div>
+                        <div ng-hide="model.currentUser.type == 'Recipient'" class="row enable-top-margin-30">
+                            <div class="col-md-3">
+                                <label for="birthDate">Birth Date</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.currentUser.birthDate" type="text" class="form-control" id="birthDate" placeholder="1 January, 1990">
+                            </div>
+                        </div>
+                        <div ng-hide="model.currentUser.type == 'Recipient'" class="row enable-top-margin-30">
+                            <div class="col-md-3">
+                                <label for="bloodType">Blood Type</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select ng-model="model.currentUser.bloodType" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="bloodType">
+                                    <option value="" selected="" disabled="">Blood Type</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row enable-top-margin-30">
+                            <div class="col-md-3">
+                                <label for="introduction">Introduction</label>
+                            </div>
+                            <div class="col-md-9">
+                                <textarea ng-model="model.currentUser.introduction" rows="5" class="form-control" id="introduction" placeholder="Lorem Ipsum"></textarea>
+                            </div>
+                        </div>
+                        <div class="row enable-top-margin">
+                            <div class="col-md-3 col-md-offset-9">
+                                <a ng-click="model.updateUser(model.currentUser)" class="btn btn-block btn-primary">Save Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Change Password -->
+                    <div role="tabpanel" class="tab-pane fade" id="password">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="newPassword">New Password</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.password.newPassword" type="password" class="form-control" id="newPassword">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="verifyNewPassword">New Password Again</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input ng-model="model.password.verifyNewPassword" type="password" class="form-control" id="verifyNewPassword">
+                            </div>
+                        </div>
+                        <div class="row enable-top-margin">
+                            <div class="col-md-3 col-md-offset-9">
+                                <a ng-click="model.updatePassword(model.password)" class="btn btn-block btn-primary">Save Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer logged-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><span class="donor-color">1,256</span> donors, <span class="org-color">157</span> organizations</p>
+                <ul class="list-inline">
+                    <li><a href="#/"><img src="images/facebook.svg" alt="facebook"></a></li>
+                    <li><a href="#/"><img src="images/twitter.svg" alt="twitter"></a></li>
+                    <li><a href="#/"><img src="images/instagram.svg" alt="instagram"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>
+
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>

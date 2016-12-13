@@ -50,7 +50,7 @@
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
                                         <label class="sr-only" for="company">Company, Organization or Institution</label>
-                                        <input ng-model="model.recipient.company" type="text" class="form-control" id="company" placeholder="Company, Organization or Institution">
+                                        <input ng-model="model.recipient.institution" type="text" class="form-control" id="company" placeholder="Company, Organization or Institution">
                                     </div>
                                 </div>
                                 <div class="row enable-top-margin">
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
-                                        <a class="btn btn-block btn-success" href="#/" ng-click="model.registerRecipient(model.recipient)">Become a recipient</a>
+                                        <a class="btn btn-block btn-success" ng-click="model.registerRecipient(model.recipient)">Become a recipient</a>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="row enable-top-margin">
                                     <div class="col-xs-12">
-                                        <a class="btn btn-block btn-success" href="#/" ng-click="model.registerDonor(model.donor)">Become a donor</a>
+                                        <a class="btn btn-block btn-success" ng-click="model.registerDonor(model.donor)">Become a donor</a>
                                     </div>
                                 </div>
                             </div>
@@ -192,4 +192,9 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
 </div>

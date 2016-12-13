@@ -3,17 +3,40 @@
         .module("LifeDrops")
         .controller("SigninController", SigninController);
 
-        function SigninController($location) {
+        function SigninController($rootScope, $location, PeopleService) {
             var vm = this;
-            vm.loginRecipient = loginRecipient;
-            vm.loginDonor = loginDonor;
+            vm.login = login;
+            vm.errorMessage = "";
 
-            function loginRecipient(recipient) {
-                console.log(recipient);
+            function login(user, userType) {
+                if(user && user.username && user.password) {
+                    user.type = userType;
+                    PeopleService
+                        .login(user)
+                        .then(
+                            function(response) {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/newsfeed");
+                            },
+                            function(err) {
+                                vm.errorMessage = "Sorry, could not sign in.";
+                                $(".alert.alert-danger").fadeIn();
+                                closeAlertBox();
+                                console.log(err);
+                            }
+                        );
+                } else {
+                    vm.errorMessage = "Please fill in both fields.";
+                    $(".alert.alert-danger").fadeIn();
+                    closeAlertBox();
+                }
             }
+        }
 
-            function loginDonor(donor) {
-                console.log(donor);
-            }
+        function closeAlertBox() {
+            window.setTimeout(function() {
+                $(".alert.alert-danger").fadeOut(300);
+            }, 3000);
         }
 })();

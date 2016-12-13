@@ -1,7 +1,7 @@
 module.exports = function () {
 
-    var mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/web-app-maker');
+    // var mongoose = require('mongoose');
+    // mongoose.createConnection('mongodb://localhost/web-app-maker');
 
     var userModel = require('./user/user.model.server')();
     var websiteModel = require('./website/website.model.server')();

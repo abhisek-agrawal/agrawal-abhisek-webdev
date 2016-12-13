@@ -1,0 +1,131 @@
+<nav class="navbar navbar-default logged-in">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/newsfeed">
+                <img alt="LifeDrops" src="images/LifeDrops_Logo2.png">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left">
+                <div class="form-group search-user">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="model.currentUser.type =='Recipient'"><a href="#/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#/user/{{model.currentUser._id}}"><i class="fa fa-user-o" aria-hidden="true"></i></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container logged-in">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div ng-show="model.currentUser.type == 'Donor' && model.posts.length == 0" class="feed-post">
+                <div class="text">
+                    <p>Looks like you're not following anyone, or nothing has been posted by them. Start by searching for recipients and follow them to get updates.</p>
+                </div>
+            </div>
+
+            <div ng-show="model.currentUser.type == 'Recipient' && model.appointments.length == 0" class="feed-post">
+                <div class="text">
+                    <p>Looks like you have no appointments, create posts to let donors know you exist.</p>
+                </div>
+            </div>
+
+            <div ng-show="model.currentUser.type == 'Donor'" class="feed-post" ng-repeat="post in model.posts | orderBy:'dateCreated':true">
+                <div class="info">
+                    <img ng-src="{{model.checkSafeImageUrl(post._user.profileImage)}}" alt="profile">
+                    <p class="name">
+                        <a href="#/user/{{post._user._id}}">{{post._user.institution}}</a>
+                    </p>
+                    <p class="date">{{post.dateCreated}}</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="image">
+                    <img ng-show="post.image" ng-src="{{model.checkSafeImageUrl(post.image)}}" alt="post image">
+                </div>
+                <div class="text">
+                    <p>{{post.text}}</p>
+                </div>
+                <hr>
+                <div class="comment">
+                    <a href="#/post/{{post._id}}"><p class="pull-left"><i class="fa fa-comment-o" aria-hidden="true"></i> Add a comment ...</p></a>
+                    <a href="#/post/{{post._id}}"><p class="pull-right">{{post.comments.length}} comments</p></a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div ng-show="model.currentUser.type == 'Recipient'" class="feed-post" ng-repeat="appointment in model.appointments | orderBy:'dateCreated':true">
+                <div class="info">
+                    <img ng-src="{{model.checkSafeImageUrl(appointment._donor.profileImage)}}" alt="profile">
+                    <p class="name">
+                        <a href="#/user/{{appointment._donor._id}}">{{appointment._donor.firstName}} {{appointment._donor.lastName}}</a>
+                    </p>
+                    <p class="date">{{appointment.dateCreated}}</p>
+                    <div class="clearfix"></div>
+                </div>
+                <hr>
+                <div class="appointment">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>{{appointment.date}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>{{appointment.time}}</p>
+                        </div>
+                        <div class="col-md-4" ng-if="appointment.status == 'Pending'">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a class="btn btn-block btn-success" ng-click="model.updateAppointment(appointment._id, 'Approved')"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a class="btn btn-block btn-danger" ng-click="model.updateAppointment(appointment._id, 'Declined')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-if="appointment.status == 'Approved' || appointment.status == 'Declined'">
+                            <a class="btn btn-block btn-default" href="#/" disabled="disabled">{{appointment.status}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer logged-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><span class="donor-color">1,256</span> donors, <span class="org-color">157</span> organizations</p>
+                <ul class="list-inline">
+                    <li><a href="#/"><img src="images/facebook.svg" alt="facebook"></a></li>
+                    <li><a href="#/"><img src="images/twitter.svg" alt="twitter"></a></li>
+                    <li><a href="#/"><img src="images/instagram.svg" alt="instagram"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>
+
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{model.errorMessage}}
+</div>
