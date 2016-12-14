@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Web Dev Course Home Page</title>
+    <!-- Let browser know website is optimized for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Import styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet"/>
+
 </head>
 <body>
-    <h1>Web Dev Course Home Page</h1>
+
+    <div class="jumbotron">
+        <div class="background-image"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-1">
+                    <img class="profile-image" src="https://scontent.fbed1-2.fna.fbcdn.net/v/t1.0-9/13615220_10154196709520993_18575881898148145_n.jpg?oh=db690392a7e1da3d2211d2fc198cf3fc&oe=58ECF439" alt="Profile Image">
+                </div>
+                <div class="col-sm-6 col-sm-offset-1">
+                    <h1 class="main-heading">Web Development Course Home Page</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container links">
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="assignment/index.html"><img class="showcase" src="images/assignment-design.png" alt="Assignment"></a>
+                <a href="assignment/index.html"><h3>Assignment Link</h3></a>
+            </div>
+            <div class="col-sm-4">
+                <a href="project/index.html"><img class="showcase" src="images/project-design.png" alt="Project"></a>
+                <a href="project/index.html"><h3>Project Link</h3></a>
+            </div>
+            <div class="col-sm-4">
+                <a href="https://github.com/abhisek-agrawal/agrawal-abhisek-webdev" target="_blank"><img class="showcase" src="images/github-design.png" alt="Github"></a>
+                <a href="https://github.com/abhisek-agrawal/agrawal-abhisek-webdev" target="_blank"><h3>Github Link</h3></a>
+            </div>
+        </div>
+    </div>
+
+    <!--<h1>Web Dev Course Home Page</h1>
 
     <p>
         Customize this home page to your linking.
@@ -25,6 +64,6 @@
         <li>
             <a href="https://github.com/abhisek-agrawal/agrawal-abhisek-webdev" target="_blank">Your public repository at GitHub.com</a>
         </li>
-    </ul>
+    </ul>-->
 </body>
 </html>
